@@ -1,10 +1,14 @@
-from Core.Factories.UserFactory import UserFactory
-from Core.Repositories.UserRepository import UserRepository
-from Core.Models.User import User
+def main():
+    from Core.Factories.UserFactory import UserFactory
+    from Core.Repositories.UserRepository import UserRepository
+    from Core.Models.User import User
 
-factory = UserFactory()
-user = factory.CreateUser("test", "test", "test")
+    factory = UserFactory()
+    user = factory.CreateUser("test", "test", "test")
 
-repo = UserRepository()
-repo.AddUser(user)
+    repo = UserRepository()
+    repo.AddUser(user)
 
+
+if __name__ == "__main__":
+    main()
