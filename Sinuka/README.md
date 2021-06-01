@@ -1,4 +1,4 @@
 ## Dependencies
-bcrypt
-django
-pymongo
+- pip install bcrypt
+- pip install django
+- pip install pymongo
