@@ -5,7 +5,7 @@ class User:
     hashedPassword = ""
     email = ""
 
-    def __init__(self, username, password, email):
+    def __init__(self, id, username, password, email):
         self.username = username
         self.hashedPassword = password
         self.email = email
