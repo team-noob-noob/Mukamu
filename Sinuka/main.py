@@ -1,6 +1,10 @@
 from Core.Factories.UserFactory import UserFactory
-test = UserFactory()
+from Core.Repositories.UserRepository import UserRepository
+from Core.Models.User import User
 
-user = test.CreateUser("test", "test", "test")
-print(user.hashedPassword)
+factory = UserFactory()
+user = factory.CreateUser("test", "test", "test")
+
+repo = UserRepository()
+repo.AddUser(user)
 
