@@ -1,7 +1,16 @@
+from ..Database.Collections import Users
+import bcrypt
+
 class UserRepository():
     def __init__(self):
         pass
 
-    # To be implemented once store is built
     def CheckCredentials(self, username, password):
-        pass
+        user = self.FindUserByUsername(username)
+        return bcrypt.checkpw(password.encode(), self.hashedPassword.encode())
+
+    def FindUserByUsername(self, username):
+        return Users.find({"username": username})
+
+    def AddUser(self, user):
+        Users.insert_one(vars(user))
