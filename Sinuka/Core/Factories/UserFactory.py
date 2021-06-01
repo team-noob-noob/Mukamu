@@ -8,5 +8,5 @@ class UserFactory():
     
     def CreateUser(self, username, password, email):
         id = uuid.uuid4()
-        hashedPassword = bcrypt.hashpw(id, password.encode(), bcrypt.gensalt(7)).decode()
-        return User(username, hashedPassword, email)
+        hashedPassword = bcrypt.hashpw(password.encode(), bcrypt.gensalt(7)).decode()
+        return User(id, username, hashedPassword, email)
