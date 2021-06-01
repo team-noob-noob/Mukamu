@@ -1,4 +1,4 @@
-from Connection import Database
+from .Connection import Database
 
 Users = Database["Users"]
 Sessions = Database["Sessions"]
