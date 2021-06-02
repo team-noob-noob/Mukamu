@@ -5,7 +5,7 @@ namespace Sinuka.Infrastructure.Database
 {
     public class ModelFactory : IUserFactory, ISessionFactory
     {
-        public User CreateSession(string username, string password, string email)
+        public User CreateUser(string username, string password, string email)
         {
             var hashedPassword = BCrypt.Net.BCrypt.EnhancedHashPassword(password);
             return new User(username, password, email);
