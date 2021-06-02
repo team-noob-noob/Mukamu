@@ -4,6 +4,6 @@ namespace Sinuka.Core.Interfaces.Factories
 {
     public interface IUserFactory
     {
-        User CreateSession(string username, string password, string email);
+        User CreateUser(string username, string password, string email);
     }
 }
