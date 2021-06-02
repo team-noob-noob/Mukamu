@@ -2,7 +2,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Sinuka.Core\Sinuka.Core.csproj" />
-    <ProjectReference Include="..\Sinuka.Infrastructure\Sinuka.Infrastructure.csproj" />
   </ItemGroup>
 
   <PropertyGroup>
