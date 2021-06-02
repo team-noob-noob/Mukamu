@@ -10,4 +10,10 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Sinuka.Application\Sinuka.Application.csproj" />
+    <ProjectReference Include="..\Sinuka.Core\Sinuka.Core.csproj" />
+    <ProjectReference Include="..\Sinuka.Infrastructure\Sinuka.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>
