@@ -1,12 +1,15 @@
 from ..Database.Collections import Users
 import bcrypt
 
-class UserRepository():
+
+class UserRepository:
     def __init__(self):
         pass
 
     def CheckCredentials(self, username, password):
         user = self.FindUserByUsername(username)
+        if user is None:
+            return False
         return bcrypt.checkpw(password.encode(), user.hashedPassword.encode())
 
     def FindUserByUsername(self, username):
