@@ -9,4 +9,4 @@ class SessionFactory:
     @staticmethod
     def create_session(user_id: uuid.UUID, token: str):
         id_ = uuid.uuid4()
-        return Session
+        return Session(id_, user_id, token)
