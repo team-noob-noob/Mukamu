@@ -9,12 +9,8 @@ namespace Sinuka.Infrastructure.Database
         {
             var optionsBuilder = new DbContextOptionsBuilder<SinukaDbContext>();
             optionsBuilder.UseMySql(
-                Sinuka.Infrastructure.Configurations.DbConfig.DbConnectionString,
-                options => {
-                    options.ServerVersion(Sinuka.Infrastructure.Configurations.DbConfig.MySqlVersion, Pomelo.EntityFrameworkCore.MySql.Infrastructure.ServerType.MySql);
-                    options.MaxBatchSize(1);
-                }
-            );
+                Sinuka.Infrastructure.Configurations.DbConfig.DbConnectionString, 
+                new MySqlServerVersion(Sinuka.Infrastructure.Configurations.DbConfig.MySqlVersion));
             optionsBuilder.EnableSensitiveDataLogging();
             optionsBuilder.EnableDetailedErrors();
             return new SinukaDbContext(optionsBuilder.Options);
