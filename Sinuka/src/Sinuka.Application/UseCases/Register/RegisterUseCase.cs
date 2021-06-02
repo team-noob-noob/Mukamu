@@ -13,12 +13,10 @@ namespace Sinuka.Application.UseCases.Register
         private readonly IUnitOfWork _unitOfWork;
 
         public RegisterUseCase(
-            IRegisterPresenter presenter,
             IUserRepository userRepository, 
             IUserFactory userFactory,
             IUnitOfWork unitOfWork)
         {
-            this._presenter = presenter;
             this._userRepository = userRepository;
             this._userFactory = userFactory;
             this._unitOfWork = unitOfWork;
