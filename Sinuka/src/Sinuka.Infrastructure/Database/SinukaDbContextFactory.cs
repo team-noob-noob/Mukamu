@@ -1,8 +1,7 @@
-using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 
-namespace Sinuka.Core.Infrastructure.Database
+namespace Sinuka.Infrastructure.Database
 {
     public class SinukaDbContextFactory : IDesignTimeDbContextFactory<SinukaDbContext>
     {

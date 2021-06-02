@@ -2,11 +2,15 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Sinuka.Core.Models;
 
-namespace Sinuka.Core.Infrastructure.Database
+namespace Sinuka.Infrastructure.Database
 {
     public class SinukaDbContext : DbContext
     {
+        public DbSet<User> Users { get; set; }
+        public DbSet<Session> Sessions { get; set; }
+
         public SinukaDbContext(DbContextOptions options) : base(options) {}
 
         protected override void OnModelCreating(ModelBuilder builder)
