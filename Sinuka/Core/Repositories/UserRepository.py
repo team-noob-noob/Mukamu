@@ -1,4 +1,4 @@
-from ..Database.Collections import Users
+from ..Factories.UserFactory import UserFactory
 from ..Models.User import User
 import bcrypt
 import pymongo
@@ -17,7 +17,7 @@ class UserRepository:
         return bcrypt.checkpw(password.encode(), user.hashedPassword.encode())
 
     def find_user_by_username(self, username: str):
-        return self.user_store.find_one({"username": username})
+        return UserFactory.parse_user_dict(self.user_store.find_one({"username": username}))
 
     def add_user(self, user: User):
         self.user_store.insert_one(vars(user))
