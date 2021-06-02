@@ -20,4 +20,4 @@ class UserRepository:
         return UserFactory.parse_user_dict(self.user_store.find_one({"username": username}))
 
     def add_user(self, user: User):
-        self.user_store.insert_one(vars(user))
+        return self.user_store.insert_one(vars(user))
