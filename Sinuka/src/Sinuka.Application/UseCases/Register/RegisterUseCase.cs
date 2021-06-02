@@ -5,9 +5,9 @@ using Sinuka.Application.Interfaces;
 
 namespace Sinuka.Application.UseCases.Register
 {
-    public class RegisterUseCase
+    public class RegisterUseCase : IRegisterUseCase
     {
-        private readonly IRegisterPresenter _presenter;
+        private IRegisterPresenter _presenter;
         private readonly IUserRepository _userRepository;
         private readonly IUserFactory _userFactory;
         private readonly IUnitOfWork _unitOfWork;
@@ -46,5 +46,7 @@ namespace Sinuka.Application.UseCases.Register
 
             this._presenter.UserCreated();
         }
+
+        public void SetPresenter(IRegisterPresenter presenter) => this._presenter = presenter;
     }
 }
