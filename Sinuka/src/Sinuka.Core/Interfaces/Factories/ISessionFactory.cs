@@ -4,6 +4,6 @@ namespace Sinuka.Core.Interfaces.Factories
 {
     public interface ISessionFactory
     {
-        Session CreateSession(User user, string token);
+        Session CreateSession(User user);
     }
 }
