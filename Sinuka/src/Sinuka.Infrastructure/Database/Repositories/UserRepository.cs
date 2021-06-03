@@ -16,11 +16,11 @@ namespace Sinuka.Infrastructure.Database.Repositories
 
         public async Task AddUser(User newUser) => await this._dbContext.Users.AddAsync(newUser);
 
-        public async Task<bool> CheckCredentials(string username, string password)
+        public async Task<User?> CheckCredentials(string username, string password)
         {
             var user = await this.FindUserByUsername(username);
-            if(user is null) return false;
-            return BCrypt.Net.BCrypt.EnhancedVerify(password, user.HashedPassword);
+            if(user is null) return null;
+            return BCrypt.Net.BCrypt.EnhancedVerify(password, user.HashedPassword) ? user : null;
         }
 
         public async Task<User?> FindUserByEmail(string email) 

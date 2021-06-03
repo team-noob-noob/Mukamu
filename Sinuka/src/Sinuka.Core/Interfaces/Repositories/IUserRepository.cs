@@ -8,6 +8,6 @@ namespace Sinuka.Core.Interfaces.Repositories
         Task AddUser(User newUser);
         Task<User?> FindUserByUsername(string username);
         Task<User?> FindUserByEmail(string email);
-        Task<bool> CheckCredentials(string username, string password);
+        Task<User?> CheckCredentials(string username, string password);
     }
 }
