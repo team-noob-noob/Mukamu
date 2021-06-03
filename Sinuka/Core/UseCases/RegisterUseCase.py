@@ -1,4 +1,5 @@
 from ..Repositories.UserRepository import UserRepository
+from ..Factories.UserFactory import UserFactory
 
 
 class RegisterInput:
@@ -22,16 +23,37 @@ class RegisterPresenter:
     def existing_username_error(self):
         pass
 
-    def incorrect_password_format(self):
+    def user_created(self):
         pass
 
 
 class RegisterUseCase:
     presenter: RegisterPresenter = None
     user_repo: UserRepository = None
+    user_factory: UserFactory = None
 
-    def __init__(self, presenter: RegisterPresenter):
-        self.presenter = presenter
+    def __init__(self, user_repo: UserRepository, user_factory: UserFactory):
+        self.user_repo = user_repo
+        self.user_factory = user_factory
 
     def run(self, use_case_input: RegisterInput):
-        pass
+        if self.user_repo.find_user_by_username(use_case_input.username) is not None:
+            self.presenter.existing_username_error()
+            return
+
+        if self.user_repo.find_user_by_email(use_case_input.email) is not None:
+            self.presenter.existing_email_error()
+            return
+
+        user = self.user_factory.create_user(
+            use_case_input.username,
+            use_case_input.password,
+            use_case_input.email
+        )
+
+        self.user_repo.add_user(user)
+
+        self.presenter.user_created()
+
+    def set_presenter(self, presenter: RegisterPresenter):
+        self.presenter = presenter
