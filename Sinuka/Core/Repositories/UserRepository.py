@@ -17,7 +17,12 @@ class UserRepository:
         return bcrypt.checkpw(password.encode(), user.hashedPassword.encode())
 
     def find_user_by_username(self, username: str):
-        return UserFactory.parse_user_dict(self.user_store.find_one({"username": username}))
+        user = self.user_store.find_one({"username": username})
+        return UserFactory.parse_user_dict(user) if user is not None else None
+
+    def find_user_by_email(self, email: str):
+        user = self.user_store.find_one({"email": email})
+        return UserFactory.parse_user_dict(user) if user is not None else None
 
     def add_user(self, user: User):
         return self.user_store.insert_one(vars(user))
