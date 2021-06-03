@@ -10,8 +10,8 @@ namespace Sinuka.Infrastructure.Database
     {
         public User CreateUser(string username, string password, string email)
         {
-            var hashedPassword = BCrypt.Net.BCrypt.EnhancedHashPassword(password);
-            return new User(username, password, email);
+            var hashedPassword = BCrypt.Net.BCrypt.EnhancedHashPassword(password, 7);
+            return new User(username, hashedPassword, email);
         }
 
         public Session CreateSession(User user)
