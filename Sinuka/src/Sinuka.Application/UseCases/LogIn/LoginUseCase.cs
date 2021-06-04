@@ -23,6 +23,7 @@ namespace Sinuka.Application.UseCases.Login
             this._sessionFactory = sessionFactory;
             this._sessionRepo = sessionRepository;
             this._userRepo = userRepository;
+            this._unitOfWork = unitOfWork;
         }
 
         public async Task Run(LoginInput input)
@@ -38,7 +39,7 @@ namespace Sinuka.Application.UseCases.Login
 
             var session = this._sessionFactory.CreateSession(user);
 
-            this._sessionRepo.AddSession(session);
+            await this._sessionRepo.AddSession(session);
 
             await this._unitOfWork.Save();
 
