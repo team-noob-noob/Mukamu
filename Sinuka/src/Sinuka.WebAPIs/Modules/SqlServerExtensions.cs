@@ -12,10 +12,14 @@ namespace Sinuka.WebAPIs.Modules
         public static IServiceCollection AddMySqlServer(this IServiceCollection services)
         {
             services.AddDbContext<SinukaDbContext>();
+
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-            services.AddScoped<IUserFactory, ModelFactory>();
-            services.AddScoped<ISessionFactory, ModelFactory>();
+
+            services.AddSingleton<IUserFactory, ModelFactory>();
+            services.AddSingleton<ISessionFactory, ModelFactory>();
+
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<ISessionRepository, SessionRepository>();
 
             return services;
         }

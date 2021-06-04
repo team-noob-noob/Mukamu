@@ -1,9 +1,10 @@
+using System.Threading.Tasks;
 using Sinuka.Core.Models;
 
 namespace Sinuka.Core.Interfaces.Repositories
 {
     public interface ISessionRepository
     {
-        void AddSession(Session session);
+        Task AddSession(Session session);
     }
 }
