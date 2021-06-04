@@ -1,13 +1,12 @@
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
-using Sinuka.Infrastructure.Utils;
 
 namespace Sinuka.Infrastructure.Security
 {
     public class JwtTokenGenerator
     {
-        public static string GeneratorToken(object payload)
+        public static string GeneratorToken(dynamic payload)
         {
             string key = Sinuka.Infrastructure.Configurations.TokenConfig.Key;
 
@@ -20,9 +19,11 @@ namespace Sinuka.Infrastructure.Security
 
             var header = new JwtHeader(credentials);
 
-            var tokenPayload = new JwtPayload();
-
-            ObjectUtils.CopyValues(tokenPayload, payload);
+            var tokenPayload = new JwtPayload()
+            {
+                { "Email", payload.Email },
+                { "Id", payload.Id }
+            };
 
             var secToken = new JwtSecurityToken(header, tokenPayload);
             var handler = new JwtSecurityTokenHandler();
