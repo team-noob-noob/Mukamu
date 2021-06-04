@@ -5,7 +5,7 @@ using Sinuka.Application.UseCases.Register;
 namespace Sinuka.WebAPIs.UseCases.Register
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("[controller]/[action]")]
     public sealed class UserController : ControllerBase, IRegisterPresenter
     {
         private readonly IRegisterUseCase _registerUseCase;
