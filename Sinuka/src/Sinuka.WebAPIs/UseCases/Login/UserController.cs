@@ -27,7 +27,9 @@ namespace Sinuka.WebAPIs.UseCases.Login
         void ILoginPresenter.SessionCreated(Session session)
         {
             this._viewModel = this.Ok(new {session.Token});
-            this._jobClient.Schedule<ExpiredSessionRemover>(x => x.RemoveSession(session.Token), session.ExpiresAt - session.CreatedAt);
+            this._jobClient.Schedule<ExpiredSessionRemover>(
+                x => x.RemoveSession(session.Token), 
+                Sinuka.Infrastructure.Configurations.TokenConfig.TokenLifetimeLength);
         }
 
         [HttpPost]
