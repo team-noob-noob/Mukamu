@@ -22,7 +22,8 @@ namespace Sinuka.Infrastructure.Security
             var tokenPayload = new JwtPayload()
             {
                 { "Email", payload.Email },
-                { "Id", payload.Id }
+                { "Id", payload.Id },
+                { "ExpiresAt", payload.ExpiresAt },
             };
 
             var secToken = new JwtSecurityToken(header, tokenPayload);

@@ -1,3 +1,4 @@
+using System;
 using Sinuka.Infrastructure.Security;
 using Sinuka.Core.Interfaces.Factories;
 using Sinuka.Core.Models;
@@ -14,11 +15,13 @@ namespace Sinuka.Infrastructure.Database
 
         public Session CreateSession(User user)
         {
+            var expiresAt = DateTime.Now - Sinuka.Infrastructure.Configurations.TokenConfig.TokenLifetimeLength;
             var payload = new {
                 user.Email,
                 user.Id,
+                ExpiresAt = expiresAt
             };
-            return new Session(user, JwtTokenGenerator.GeneratorToken(payload));
+            return new Session(user, JwtTokenGenerator.GeneratorToken(payload), expiresAt);
         }
     }
 }
