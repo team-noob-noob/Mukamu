@@ -43,7 +43,7 @@ namespace Sinuka.Application.UseCases.Login
 
             await this._unitOfWork.Save();
 
-            this._presenter.SessionCreated(session.Token);
+            this._presenter.SessionCreated(session);
         }
 
         public void SetPresenter(ILoginPresenter presenter)

@@ -24,5 +24,8 @@ namespace Sinuka.Infrastructure.Database.Repositories
             );
             return result.Any() ? result.ElementAt(0) : null;
         }
+
+        public void RemoveSession(Session session)
+            => this._dbContext.Remove(session);
     }
 }
