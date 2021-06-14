@@ -4,7 +4,7 @@ namespace Sinuka.Core.Models
 {
     public class Client : IEntity
     {
-        public Client(string Name, string Secret, string HostName, string PostLoginRedirect = "", string PostLogoutRedirect = "")
+        public Client(string Name, string Secret, string HostName, string PostLoginRedirect = null, string PostLogoutRedirect = null)
         {
             this.Name = Name;
             this.Secret = Secret;
