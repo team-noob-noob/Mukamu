@@ -52,6 +52,7 @@ namespace Sinuka.WebAPIs
                 };
             var storage = new MySqlStorage(Sinuka.Infrastructure.Configurations.DbConfig.DbConnectionString, options);
             services.AddHangfire(x => x.UseStorage(storage));
+            services.AddHangfireServer();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
