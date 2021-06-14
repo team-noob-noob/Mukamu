@@ -13,14 +13,12 @@ namespace Sinuka.Application.UseCases.Logout
 
         public async Task Run(LogoutInput input)
         {
-            this._presenter.Done();
-
             var session = await this._sessionRepo.FindSessionByToken(input.Token);
 
-            if(session is null)
-                return;
+            if(session is not null)
+                this._sessionRepo.RemoveSession(session);
 
-            this._sessionRepo.RemoveSession(session);           
+            this._presenter.Done();
         }
 
         public void SetPresenter(ILogoutPresenter presenter)
