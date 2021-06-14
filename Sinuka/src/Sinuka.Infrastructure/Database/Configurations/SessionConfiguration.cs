@@ -11,6 +11,7 @@ namespace Sinuka.Infrastructure.Database.Configurations
         {
             builder.HasKey(s => s.Id);
             builder.HasOne<User>(s => s.User);
+            builder.HasOne<Client>(s => s.Client);
         }
     }
 }
