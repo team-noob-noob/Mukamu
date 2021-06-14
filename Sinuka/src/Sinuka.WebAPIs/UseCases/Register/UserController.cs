@@ -27,6 +27,10 @@ namespace Sinuka.WebAPIs.UseCases.Register
         [HttpPost]
         public async Task<IActionResult> Register([FromBody] RegisterInput input)
         {
+            var result = new RegisterInputValidation().Validate(input);
+            if(!result.IsValid)
+                return this.BadRequest(result.Errors);
+
             this._registerUseCase.SetPresenter(this);
 
             await this._registerUseCase.Run(input);
