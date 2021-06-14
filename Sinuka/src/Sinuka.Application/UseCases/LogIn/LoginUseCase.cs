@@ -11,23 +11,38 @@ namespace Sinuka.Application.UseCases.Login
         private readonly IUserRepository _userRepo;
         private readonly ISessionFactory _sessionFactory;
         private readonly ISessionRepository _sessionRepo;
+        private readonly IClientRepository _clientRepo;
         private readonly IUnitOfWork _unitOfWork;
 
+        // TODO: Move validations somewhere
         public LoginUseCase(
             IUserRepository userRepository,
             ISessionRepository sessionRepository,
             ISessionFactory sessionFactory,
-            IUnitOfWork unitOfWork
+            IUnitOfWork unitOfWork,
+            IClientRepository clientRepository
         )
         {
             this._sessionFactory = sessionFactory;
             this._sessionRepo = sessionRepository;
             this._userRepo = userRepository;
             this._unitOfWork = unitOfWork;
+            this._clientRepo = clientRepository;
         }
 
         public async Task Run(LoginInput input)
         {
+            var client = this._clientRepo.VerifyClientData(
+                input.ClientId,
+                input.ClientName,
+                input.ClientSecret
+            );
+            if(client is null)
+            {
+                this._presenter.IncorrectCredentials();
+                return;
+            }
+
             var user = await this._userRepo.CheckCredentials(
                 input.username, input.password);
 
