@@ -1,5 +1,6 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using FluentValidation;
 using Sinuka.Application.UseCases.Register;
 
 namespace Sinuka.WebAPIs.UseCases.Register
@@ -32,5 +33,15 @@ namespace Sinuka.WebAPIs.UseCases.Register
 
             return this._viewModel;
         }
-    }    
+    }
+
+    public sealed class RegisterInputValidation : AbstractValidator<RegisterInput>
+    {
+        public RegisterInputValidation()
+        {
+            RuleFor(r => r.Email).NotEmpty().NotNull();
+            RuleFor(r => r.Password).NotEmpty().NotNull();
+            RuleFor(r => r.Username).NotEmpty().NotNull();
+        }
+    }
 }

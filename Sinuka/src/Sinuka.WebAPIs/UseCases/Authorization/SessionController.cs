@@ -1,5 +1,6 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using FluentValidation;
 using Sinuka.Application.UseCases.Authorization;
 
 namespace Sinuka.WebAPIs.UseCases.Authorization
@@ -23,11 +24,23 @@ namespace Sinuka.WebAPIs.UseCases.Authorization
         [HttpGet]
         public async Task<IActionResult> Authorize([FromBody] AuthorizationInput input)
         {
+            var result = new AuthorizationInputValidation().Validate(input);
+            if(!result.IsValid)
+                return this.BadRequest(result.Errors);
+
             this._useCase.SetPresenter(this);
 
             await this._useCase.Run(input);
 
             return this._viewModel;
+        }
+    }
+
+    public class AuthorizationInputValidation : AbstractValidator<AuthorizationInput>
+    {
+        public AuthorizationInputValidation()
+        {
+            RuleFor(c => c.Token).NotNull().NotEmpty();
         }
     }
 }

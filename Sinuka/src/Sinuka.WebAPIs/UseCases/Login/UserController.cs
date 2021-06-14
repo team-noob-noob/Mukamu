@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Hangfire;
+using FluentValidation;
 using Sinuka.Application.UseCases.Login;
 using Sinuka.Core.Models;
 using Sinuka.WebAPIs.BackgroundProcess;
@@ -40,11 +41,27 @@ namespace Sinuka.WebAPIs.UseCases.Login
         [HttpPost]
         public async Task<IActionResult> Login([FromBody] LoginInput input)
         {
+            var result = new LoginInputValidation().Validate(input);
+            if(!result.IsValid)
+                return this.BadRequest(result.Errors);
+
             this._useCase.SetPresenter(this);
 
             await this._useCase.Run(input);
 
             return this._viewModel;
+        }
+    }
+
+    public class LoginInputValidation : AbstractValidator<LoginInput>
+    {
+        public LoginInputValidation()
+        {
+            RuleFor(l => l.ClientId).NotEmpty().NotNull();
+            RuleFor(l => l.ClientName).NotEmpty().NotNull();
+            RuleFor(l => l.ClientSecret).NotEmpty().NotNull();
+            RuleFor(l => l.username).NotNull();
+            RuleFor(l => l.password).NotNull();
         }
     }
 }
