@@ -16,9 +16,18 @@ namespace Sinuka.Application.UseCases.Logout
             var session = await this._sessionRepo.FindSessionByToken(input.Token);
 
             if(session is not null)
+            {
                 this._sessionRepo.RemoveSession(session);
-
+                
+                if(session.Client.PostLogoutRedirect is not null)
+                {
+                    this._presenter.Redirect(session.Client.PostLogoutRedirect);
+                    return;
+                }
+            }
+            
             this._presenter.Done();
+            
         }
 
         public void SetPresenter(ILogoutPresenter presenter)

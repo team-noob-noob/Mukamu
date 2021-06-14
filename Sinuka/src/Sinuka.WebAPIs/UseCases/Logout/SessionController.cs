@@ -18,6 +18,9 @@ namespace Sinuka.WebAPIs.UseCases.Logout
         void ILogoutPresenter.Done()
             => this._viewModel = this.Ok(new {message="Logged out"});
 
+        void ILogoutPresenter.Redirect(string url)
+            => this._viewModel = this.Redirect(url);
+
         [HttpPut]
         public async Task<IActionResult> Logout([FromBody] LogoutInput input)
         {
