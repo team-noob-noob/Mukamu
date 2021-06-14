@@ -13,13 +13,8 @@ namespace Sinuka.Infrastructure.Database.Repositories
         public ClientRepository(SinukaDbContext dbContext)
             => this._dbContext = dbContext;
         
-
-        public async Task<Client?> VerifyClientData(Guid id, string name, string secret)
-            => await Task.Run(
-                    () => 
-                        this._dbContext.Clients
-                            .FirstOrDefault(c => c.Id.Equals(id) && c.Name.Equals(name) && c.Secret.Equals(secret))
-                );
-        
+        public Client? VerifyClientData(Guid id, string name, string secret)
+            => this._dbContext.Clients
+                    .FirstOrDefault(c => c.Id.Equals(id) && c.Name.Equals(name) && c.Secret.Equals(secret));
     }
 }

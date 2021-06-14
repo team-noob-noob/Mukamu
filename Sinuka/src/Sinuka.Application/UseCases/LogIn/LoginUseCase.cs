@@ -39,7 +39,7 @@ namespace Sinuka.Application.UseCases.Login
             );
             if(client is null)
             {
-                this._presenter.IncorrectCredentials();
+                this._presenter.IncorrectClient();
                 return;
             }
 
@@ -58,7 +58,10 @@ namespace Sinuka.Application.UseCases.Login
 
             await this._unitOfWork.Save();
 
-            this._presenter.SessionCreated(session);
+            if(client.PostLoginRedirect is null)
+                this._presenter.SessionCreated(session);
+            else
+                this._presenter.RedirectCreatedSession(session, client.PostLoginRedirect);
         }
 
         public void SetPresenter(ILoginPresenter presenter)

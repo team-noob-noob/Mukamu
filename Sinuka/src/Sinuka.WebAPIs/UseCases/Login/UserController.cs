@@ -1,5 +1,6 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.WebUtilities;
 using Hangfire;
 using FluentValidation;
 using Sinuka.Application.UseCases.Login;
@@ -34,9 +35,10 @@ namespace Sinuka.WebAPIs.UseCases.Login
         }
 
         void ILoginPresenter.IncorrectClient()
-        {
-            this._viewModel = this.BadRequest(new {message = "Client details are invalid"});
-        }
+            => this._viewModel = this.BadRequest(new {message = "Client details are invalid"});
+
+        void ILoginPresenter.RedirectCreatedSession(Session session, string url)
+            => this._viewModel = this.Redirect(QueryHelpers.AddQueryString(url, "token", session.Token));
 
         [HttpPost]
         public async Task<IActionResult> Login([FromBody] LoginInput input)
