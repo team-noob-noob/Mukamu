@@ -26,21 +26,20 @@ namespace Sinuka.Infrastructure.Database.Repositories
         public async Task<User?> FindUserByEmail(string email) 
         {
             var result = await Task.FromResult(
-                this._dbContext.Users.Where(
+                this._dbContext.Users.FirstOrDefault(
                     u => !u.DeletedAt.HasValue && u.Email == email)
-                    .ToList()
+                    
             );
-            return result.Any() ? result.ElementAt(0) : null;
+            return result;
         }
 
         public async Task<User?> FindUserByUsername(string username) 
         {
             var result = await Task.FromResult(
-                this._dbContext.Users.Where(
+                this._dbContext.Users.FirstOrDefault(
                     u => !u.DeletedAt.HasValue && u.Username == username)
-                    .ToList()
             );
-            return result.Any() ? result.ElementAt(0) : null;
+            return result;
         }
     }
 }
