@@ -5,7 +5,6 @@ using Hangfire;
 using FluentValidation;
 using Sinuka.Application.UseCases.Login;
 using Sinuka.Core.Models;
-using Sinuka.WebAPIs.BackgroundProcess;
 using System.Dynamic;
 
 namespace Sinuka.WebAPIs.UseCases.Login
