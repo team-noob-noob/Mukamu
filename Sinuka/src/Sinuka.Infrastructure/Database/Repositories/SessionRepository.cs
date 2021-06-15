@@ -18,11 +18,10 @@ namespace Sinuka.Infrastructure.Database.Repositories
         public async Task<Session?> FindSessionByToken(string token)
         {
             var result = await Task.FromResult(
-                this._dbContext.Sessions.Where(
-                    s => !s.DeletedAt.HasValue && s.Token == token)
-                    .ToList()
+                this._dbContext.Sessions.FirstOrDefault(
+                    s => !s.DeletedAt.HasValue && s.SessionToken.Token == token)
             );
-            return result.Any() ? result.ElementAt(0) : null;
+            return result;
         }
 
         public void RemoveSession(Session session)

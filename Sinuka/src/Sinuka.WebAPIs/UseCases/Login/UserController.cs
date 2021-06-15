@@ -6,6 +6,7 @@ using FluentValidation;
 using Sinuka.Application.UseCases.Login;
 using Sinuka.Core.Models;
 using Sinuka.WebAPIs.BackgroundProcess;
+using System.Dynamic;
 
 namespace Sinuka.WebAPIs.UseCases.Login
 {
@@ -26,19 +27,37 @@ namespace Sinuka.WebAPIs.UseCases.Login
         void ILoginPresenter.IncorrectCredentials()
             => this._viewModel = this.BadRequest(new {message = "Incorrect username or password"});
 
-        void ILoginPresenter.SessionCreated(Session session)
-        {
-            this._viewModel = this.Ok(new {session.Token, session.ExpiresAt});
-            this._jobClient.Schedule<ExpiredSessionRemover>(
-                x => x.RemoveSession(session.Token), 
-                Sinuka.Infrastructure.Configurations.TokenConfig.TokenLifetimeLength);
-        }
-
         void ILoginPresenter.IncorrectClient()
             => this._viewModel = this.BadRequest(new {message = "Client details are invalid"});
 
-        void ILoginPresenter.RedirectCreatedSession(Session session, string url)
-            => this._viewModel = this.Redirect(QueryHelpers.AddQueryString(url, "token", session.Token));
+        void ILoginPresenter.SessionCreated(Session session, bool isRefreshable)
+        {
+            dynamic payload = new ExpandoObject();
+            payload.session_token = session.SessionToken.Token;
+            payload.session_token_expiry = session.SessionToken.ExpiresAt;
+            
+            if(isRefreshable)
+            {
+                payload.refresh_token = session.RefreshToken.Token;
+                payload.refresh_token_expiry = session.RefreshToken.ExpiresAt;
+            }
+
+            this._viewModel = Ok(payload);
+        }
+
+        void ILoginPresenter.RedirectCreatedSession(Session session, string url, bool isRefreshable)
+        {
+            if(isRefreshable)
+            {
+                url = QueryHelpers.AddQueryString(url, "refresh_token", session.RefreshToken.Token);
+                url = QueryHelpers.AddQueryString(url, "refresh_token_expiry", session.RefreshToken.ExpiresAt.ToString());
+            }
+
+            url = QueryHelpers.AddQueryString(url, "session_token", session.SessionToken.Token);
+            url = QueryHelpers.AddQueryString(url, "session_token_expiry", session.SessionToken.ExpiresAt.ToString());
+
+            this._viewModel = Redirect(url);
+        }
 
         [HttpPost]
         public async Task<IActionResult> Login([FromBody] LoginInput input)
@@ -64,6 +83,7 @@ namespace Sinuka.WebAPIs.UseCases.Login
             RuleFor(l => l.ClientSecret).NotEmpty().NotNull();
             RuleFor(l => l.username).NotNull();
             RuleFor(l => l.password).NotNull();
+            RuleFor(l => l.RememberLogin).NotNull();
         }
     }
 }

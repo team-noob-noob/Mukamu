@@ -17,6 +17,8 @@ namespace Sinuka.WebAPIs.Modules
 
             services.AddSingleton<IUserFactory, ModelFactory>();
             services.AddSingleton<ISessionFactory, ModelFactory>();
+            services.AddSingleton<ISessionTokenFactory, ModelFactory>();
+            services.AddSingleton<IRefreshTokenFactory, ModelFactory>();
 
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<ISessionRepository, SessionRepository>();

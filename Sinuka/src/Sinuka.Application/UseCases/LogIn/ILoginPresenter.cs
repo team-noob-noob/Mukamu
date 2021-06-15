@@ -6,7 +6,7 @@ namespace Sinuka.Application.UseCases.Login
     {
         void IncorrectCredentials();
         void IncorrectClient();
-        void SessionCreated(Session session);
-        void RedirectCreatedSession(Session session, string url);
+        void SessionCreated(Session session, bool isRefreshable);
+        void RedirectCreatedSession(Session session, string url, bool isRefreshable);
     }
 }

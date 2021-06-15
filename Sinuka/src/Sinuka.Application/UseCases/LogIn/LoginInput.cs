@@ -9,5 +9,6 @@ namespace Sinuka.Application.UseCases.Login
         public Guid ClientId { get; set; }
         public string ClientName { get; set; }
         public string ClientSecret { get; set; }
+        public bool RememberLogin { get; set; }
     }
 }

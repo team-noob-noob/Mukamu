@@ -5,17 +5,16 @@ namespace Sinuka.Core.Models
     public class Session : IEntity
     {
         public Session() {}
-        public Session(User user, string token, DateTime expiresAt)
+        public Session(User user, SessionToken sessionToken)
         {
             this.User = user;
-            this.Token = token;
+            this.SessionToken = sessionToken;
             this.Id = Guid.NewGuid();
-            this.ExpiresAt = expiresAt;
         }
 
         public Guid Id { get; set; }
-        public string Token { get; set; }
-        public DateTime ExpiresAt { get; set; }
+        public virtual SessionToken SessionToken { get; set; }
+        public virtual RefreshToken? RefreshToken { get; set; }
         public virtual User User { get; set; }
         public virtual Client Client { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.Now;
