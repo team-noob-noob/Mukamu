@@ -21,7 +21,7 @@ namespace Sinuka.Application.UseCases.Authorization
 
         public async Task Run(AuthorizationInput input)
         {
-            if(await this._sessionRepo.FindSessionByToken(input.Token) is null)
+            if(await this._sessionRepo.FindSessionBySessionToken(input.Token) is null)
             {
                 this._presenter.InvalidToken();
                 return;

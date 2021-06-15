@@ -7,6 +7,6 @@ namespace Sinuka.Core.Interfaces.Repositories
     {
         Task AddSession(Session session);
         void RemoveSession(Session session);
-        Task<Session?> FindSessionByToken(string token);
+        Task<Session?> FindSessionBySessionToken(string token);
     }
 }

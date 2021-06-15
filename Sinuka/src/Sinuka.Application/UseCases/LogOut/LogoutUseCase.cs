@@ -20,7 +20,7 @@ namespace Sinuka.Application.UseCases.Logout
 
         public async Task Run(LogoutInput input)
         {
-            var session = await this._sessionRepo.FindSessionByToken(input.Token);
+            var session = await this._sessionRepo.FindSessionBySessionToken(input.Token);
 
             if(session is not null)
             {

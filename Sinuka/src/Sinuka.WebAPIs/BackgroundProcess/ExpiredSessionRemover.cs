@@ -13,7 +13,7 @@ namespace Sinuka.WebAPIs.BackgroundProcess
 
         public async Task RemoveSession(string token)
         {
-            var session = await this._sessionRepository.FindSessionByToken(token);
+            var session = await this._sessionRepository.FindSessionBySessionToken(token);
             this._sessionRepository.RemoveSession(session);
         }
     }
