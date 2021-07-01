@@ -10,6 +10,7 @@ using Sinuka.Core.Models;
 namespace Sinuka.Tests.UnitTests.Application.UseCases
 {
     [TestFixture]
+    [Category("Unit")]
     public class AuthorizationUseCaseTests
     {
         private AuthorizationUseCase _sut;
