@@ -22,20 +22,20 @@ namespace Sinuka.Application.UseCases.Authorization
         public async Task Run(AuthorizationInput input)
         {
             var session = await this._sessionRepo.FindSessionBySessionToken(input.Token);
-            if(
-                await this._sessionRepo.FindSessionBySessionToken(input.Token) is null 
-                || session.SessionToken.ExpiresAt < System.DateTime.Now
-            )
+
+            if(session is null || session.SessionToken.ExpiresAt < System.DateTime.Now)
             {
                 // If Session only have SessionToken, remove expired token
                 // If Session have RefreshToken, dont do anything
-                if(session.RefreshToken is null)
+                if(session is not null && session?.RefreshToken is null)
                     this._sessionRepo.RemoveSession(session);
                 
                 this._presenter.InvalidToken();
                 
                 return;
             }
+
+            await this._unitOfWork.Save();
 
             this._presenter.ValidToken();
         }
