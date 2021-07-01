@@ -29,13 +29,14 @@ namespace Sinuka.Application.UseCases.Authorization
                 // If Session have RefreshToken, dont do anything
                 if(session is not null && session?.RefreshToken is null)
                     this._sessionRepo.RemoveSession(session);
+
                 
                 this._presenter.InvalidToken();
                 
+                await this._unitOfWork.Save();
+
                 return;
             }
-
-            await this._unitOfWork.Save();
 
             this._presenter.ValidToken();
         }
