@@ -30,7 +30,7 @@ namespace Sinuka.Infrastructure.Database
 
         public SessionToken CreateSessionToken(dynamic payload)
         {
-            var expiresAt = DateTime.Now - Sinuka.Infrastructure.Configurations.TokenConfig.TokenLifetimeLength;
+            var expiresAt = DateTime.Now + Sinuka.Infrastructure.Configurations.TokenConfig.TokenLifetimeLength;
             payload.ExpiresAt = expiresAt;
             var token = JwtTokenGenerator.GeneratorToken(payload);
             return new SessionToken(token, expiresAt);
