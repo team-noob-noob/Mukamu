@@ -11,13 +11,13 @@ namespace Sinuka.WebAPIs.UseCases.Login
 {
     [ApiController]
     [Route("[controller]/[action]")]
-    public class UserController : ControllerBase, ILoginPresenter
+    public class SessionController : ControllerBase, ILoginPresenter
     {
         private IActionResult _viewModel;
         private readonly ILoginUseCase _useCase;
         private readonly IBackgroundJobClient _jobClient;
 
-        public UserController(ILoginUseCase useCase, IBackgroundJobClient jobClient)
+        public SessionController(ILoginUseCase useCase, IBackgroundJobClient jobClient)
         {
             this._useCase = useCase;
             this._jobClient = jobClient;
