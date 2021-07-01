@@ -30,7 +30,7 @@ namespace Sinuka.Application.UseCases.Refresh
         public async Task Run(RefreshInput input)
         {
             var session = await this._sessionRepo.FindSessionByRefreshToken(input.RefreshToken);
-            if (session is null || session.RefreshToken is null || session.RefreshToken.ExpiresAt < DateTime.Now)
+            if (session is null || session.RefreshToken is null || session.RefreshToken.IsExpired())
             {
                 this._presenter.InvalidToken();
                 return;

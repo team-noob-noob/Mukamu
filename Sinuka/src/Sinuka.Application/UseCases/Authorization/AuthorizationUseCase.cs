@@ -23,7 +23,7 @@ namespace Sinuka.Application.UseCases.Authorization
         {
             var session = await this._sessionRepo.FindSessionBySessionToken(input.Token);
 
-            if(session is null || session.SessionToken.ExpiresAt < System.DateTime.Now)
+            if(session is null || session.SessionToken.IsExpired())
             {
                 // If Session only have SessionToken, remove expired token
                 // If Session have RefreshToken, dont do anything

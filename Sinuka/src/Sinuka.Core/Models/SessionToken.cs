@@ -17,5 +17,11 @@ namespace Sinuka.Core.Models
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
         public DateTime? DeletedAt { get; set; }
+
+        public bool IsExpired(DateTime? now = null)
+        {
+            now = now is not null ? now : DateTime.Now;
+            return this.ExpiresAt < now;
+        }
     }
 }
