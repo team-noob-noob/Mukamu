@@ -17,9 +17,15 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 5.0.x
-    - name: Restore dependencies
+    - name: [Sinuka] Restore dependencies
       run: cd Sinuka && dotnet restore
-    - name: Build
+    - name: [Sinuka] Build
       run: cd Sinuka && dotnet build --no-restore
-    - name: Test
+    - name: [Sinuka] Test
       run: cd Sinuka && dotnet test --no-build --verbosity normal
+    - name: [Mukamu] Restore dependencies
+      run: dotnet restore
+    - name: [Mukamu] Build
+      run: dotnet build --no-restore
+    - name: [Mukamu] Test
+      run: dotnet test --no-build --verbosity normal
