@@ -8,8 +8,7 @@ using Sinuka.Core.Models;
 
 namespace Sinuka.Tests.UnitTests.Application
 {
-    [TestFixture]
-    [Category("Unit")]
+    [TestFixture, Category("Unit")]
     public class LogoutUseCaseTests
     {
         private Mock<ILogoutPresenter> _mockPresenter;

@@ -10,8 +10,7 @@ using Sinuka.Core.Models;
 
 namespace Sinuka.Tests.UnitTests.Application.UseCases
 {
-    [TestFixture]
-    [Category("Unit")]
+    [TestFixture, Category("Unit")]
     public class LoginUseCaseTests
     {
         private LoginUseCase _sut;

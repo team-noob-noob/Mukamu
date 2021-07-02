@@ -10,8 +10,7 @@ using Sinuka.Core.Models;
 
 namespace Sinuka.Tests.UnitTests.Application
 {
-    [TestFixture]
-    [Category("Unit")]
+    [TestFixture, Category("Unit")]
     public class RefreshUseCaseTests
     {
         private RefreshUseCase _sut;
