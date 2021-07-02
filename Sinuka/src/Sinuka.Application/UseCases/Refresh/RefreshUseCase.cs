@@ -43,6 +43,8 @@ namespace Sinuka.Application.UseCases.Refresh
             session.SessionToken = this._sessionFactory.CreateSession(session.User).SessionToken;
 
             await this._unitOfWork.Save();
+
+            this._presenter.Done(session);
         }
 
         public void SetPresenter(IRefreshPresenter presenter)
