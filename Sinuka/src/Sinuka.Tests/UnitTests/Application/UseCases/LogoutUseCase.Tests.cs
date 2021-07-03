@@ -34,7 +34,7 @@ namespace Sinuka.Tests.UnitTests.Application
         }
 
         [Test]
-        public async Task ShouldCallRedirect_IfClientIsNotNull()
+        public async Task LogoutUseCaseShouldCallRedirect_IfClientIsNotNull()
         {
             // Arrange
             this._mockSessionRepo
@@ -50,7 +50,7 @@ namespace Sinuka.Tests.UnitTests.Application
         }
 
         [Test]
-        public async Task ShouldCallDone_IfClientIsNull()
+        public async Task LogoutUseCaseShouldCallDone_IfClientIsNull()
         {
              // Arrange
             this._mockSessionRepo

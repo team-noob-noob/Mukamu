@@ -39,7 +39,7 @@ namespace Sinuka.Tests.UnitTests.Application
         }
 
         [Test]
-        public async Task ShouldCallUserNameIsTaken_IfUsernameTaken()
+        public async Task RegisterUseCaseShouldCallUserNameIsTaken_IfUsernameTaken()
         {
             // Arrange
             this._mockUserRepo.Setup(x => x.FindUserByUsername(It.IsAny<string>())).ReturnsAsync(new User("", "", ""));
@@ -53,7 +53,7 @@ namespace Sinuka.Tests.UnitTests.Application
         }
 
         [Test]
-        public async Task ShouldCallEmailIsTaken_IfEmailTaken()
+        public async Task RegisterUseCaseShouldCallEmailIsTaken_IfEmailTaken()
         {
             // Arrange
             this._mockUserRepo.Setup(x => x.FindUserByUsername(It.IsAny<string>())).ReturnsAsync(null as User);
@@ -68,7 +68,7 @@ namespace Sinuka.Tests.UnitTests.Application
         }
 
         [Test]
-        public async Task ShouldCallCreated_IfAccountCreated()
+        public async Task RegisterUseCaseShouldCallCreated_IfAccountCreated()
         {
             // Arrange
             this._mockUserRepo.Setup(x => x.FindUserByUsername(It.IsAny<string>())).ReturnsAsync(null as User);

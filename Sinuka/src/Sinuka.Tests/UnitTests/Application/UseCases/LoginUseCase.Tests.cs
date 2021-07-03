@@ -48,7 +48,7 @@ namespace Sinuka.Tests.UnitTests.Application.UseCases
         }
 
         [Test]
-        public async Task ShouldCallIncorrectClient_IfClientInfoIsInvalid()
+        public async Task LoginUseCaseShouldCallIncorrectClient_IfClientInfoIsInvalid()
         {
             // Arrange
             this._mockClientRepo.Setup(x => x.VerifyClientData(It.IsAny<Guid>(), It.IsAny<string>(), It.IsAny<string>())).Returns(null as Client);
@@ -62,7 +62,7 @@ namespace Sinuka.Tests.UnitTests.Application.UseCases
         }
 
         [Test]
-        public async Task ShouldCallIncorrectCredentials_IfUserCredentialsAreInvalid()
+        public async Task LoginUseCaseShouldCallIncorrectCredentials_IfUserCredentialsAreInvalid()
         {
             // Arrange
             this._mockClientRepo
@@ -81,7 +81,7 @@ namespace Sinuka.Tests.UnitTests.Application.UseCases
         }
 
         [Test]
-        public async Task ShouldCallSessionCreated_IfValidUserAndNullPostLoginRedirect()
+        public async Task LoginUseCaseShouldCallSessionCreated_IfValidUserAndNullPostLoginRedirect()
         {
             // Arrange
             this._mockClientRepo
@@ -101,7 +101,7 @@ namespace Sinuka.Tests.UnitTests.Application.UseCases
         }
 
         [Test]
-        public async Task ShouldCallRedirectCreatedSession_IfValidUserAndPostLoginRedirect()
+        public async Task LoginUseCaseShouldCallRedirectCreatedSession_IfValidUserAndPostLoginRedirect()
         {
             // Arrange
             this._mockClientRepo

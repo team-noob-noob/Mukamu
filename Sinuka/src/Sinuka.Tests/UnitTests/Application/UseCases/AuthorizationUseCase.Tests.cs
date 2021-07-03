@@ -34,7 +34,7 @@ namespace Sinuka.Tests.UnitTests.Application.UseCases
         }
 
         [Test]
-        public async Task ShouldCallInvalidToken_IfInputTokenIsInvalid()
+        public async Task AuthorizationUseCaseShouldCallInvalidToken_IfInputTokenIsInvalid()
         {
             // Arrange
             this._mockedSessionRepo.Setup(x => x.FindSessionBySessionToken(It.IsAny<string>())).ReturnsAsync(null as Session);
@@ -51,7 +51,7 @@ namespace Sinuka.Tests.UnitTests.Application.UseCases
         }
 
         [Test]
-        public async Task ShouldCallRemoveToken_IfInputTokenIsInvalidAndHasRefreshToken()
+        public async Task AuthorizationUseCaseShouldCallRemoveToken_IfInputTokenIsInvalidAndHasRefreshToken()
         {
             // Arrange
             this._mockedSessionRepo
@@ -71,7 +71,7 @@ namespace Sinuka.Tests.UnitTests.Application.UseCases
         }
 
         [Test]
-        public async Task ShouldCallValidToken_IfInputTokenIsValid()
+        public async Task AuthorizationUseCaseShouldCallValidToken_IfInputTokenIsValid()
         {
             // Arrange
             this._mockedSessionRepo

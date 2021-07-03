@@ -42,7 +42,7 @@ namespace Sinuka.Tests.UnitTests.Application
         }
 
         [Test]
-        public async Task ShouldCallDone_IfValidSession()
+        public async Task RefreshUseCaseShouldCallDone_IfValidSession()
         {
             // Arrange
             this._mockSessionRepo
@@ -64,7 +64,7 @@ namespace Sinuka.Tests.UnitTests.Application
         }
 
         [Test]
-        public async Task ShouldCallInvalidToken_IfInvalidSession()
+        public async Task RefreshUseCaseShouldCallInvalidToken_IfInvalidSession()
         {
             // Arrange
             this._mockSessionRepo
