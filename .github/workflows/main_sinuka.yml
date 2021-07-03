@@ -23,10 +23,10 @@ jobs:
         include-prerelease: true
 
     - name: Build with dotnet
-      run: dotnet  build --configuration Release ./Sinuka/Sinuka.sln
+      run: dotnet  build --configuration Release ./Sinuka/src/Sinuka.WebAPIs/Sinuka.WebAPIs.csproj
 
     - name: dotnet publish
-      run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp ./Sinuka/Sinuka.sln
+      run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp ./Sinuka/src/Sinuka.WebAPIs/Sinuka.WebAPIs.csproj
 
     - name: Upload artifact for deployment job
       uses: actions/upload-artifact@v2
