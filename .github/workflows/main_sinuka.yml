@@ -54,4 +54,4 @@ jobs:
         app-name: 'sinuka'
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_3602861bbabe48e0b334aaf9226f5f2c }}
-        package: .
+        package: ${{env.DOTNET_ROOT}}/myapp
