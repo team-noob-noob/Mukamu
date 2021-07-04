@@ -1,0 +1,1 @@
+dotnet run --project ./src/Sinuka.WebAPIs/Sinuka.WebAPIs.csproj
