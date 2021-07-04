@@ -12,7 +12,8 @@
     <PackageReference Include="Hangfire.NetCore" Version="1.7.23" />
     <PackageReference Include="Hangfire.Storage.MySql" Version="2.1.0-beta" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.6" />
-    <PackageReference Include="NewRelic.Agent" Version="8.39.2" />
+    <PackageReference Include="NewRelic.Agent" Version="8.40.0" />
+    <PackageReference Include="NewRelic.Agent.Api" Version="8.40.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
   </ItemGroup>
 
