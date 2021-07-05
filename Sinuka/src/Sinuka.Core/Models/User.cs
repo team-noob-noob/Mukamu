@@ -5,6 +5,7 @@ namespace Sinuka.Core.Models
 {
     public class User : IEntity
     {
+        public User() {}
         public User(string username, string hashedPassword, EmailAddress email)
         {
             this.Id = Guid.NewGuid();

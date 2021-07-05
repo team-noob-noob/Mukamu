@@ -12,6 +12,9 @@ namespace Sinuka.Infrastructure.Database
         public DbSet<Session> Sessions { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<Client> Clients { get; set; }
+        public DbSet<EmailAddress> EmailAddresses { get; set; }
+        public DbSet<SessionToken> SessionTokens { get; set; }
+        public DbSet<RefreshToken> RefreshTokens { get; set; }
 
         public SinukaDbContext(DbContextOptions options) : base(options) {}
 
