@@ -17,7 +17,11 @@ namespace Sinuka.Infrastructure.Database
         {
             // TODO: Move the '7' to configurations as part of SecurityConfigs or something
             var hashedPassword = BCrypt.Net.BCrypt.EnhancedHashPassword(password, 7);
-            return new User(username, hashedPassword, email);
+            var token = KeyGenerator.GetUniqueKeyOriginal_BIASED(
+                Sinuka.Infrastructure.Configurations.TokenConfig.RefreshTokenLength
+            );
+            var emailInstance = new EmailAddress(email, token);
+            return new User(username, hashedPassword, emailInstance);
         }
 
         public Session CreateSession(User user)

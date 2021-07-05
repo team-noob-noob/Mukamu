@@ -89,7 +89,7 @@ namespace Sinuka.Tests.UnitTests.Application.UseCases
                 .Returns(new Client("", "", "")); 
             this._mockUserRepo
                 .Setup(x => x.CheckCredentials(It.IsAny<string>(), It.IsAny<string>()))
-                .ReturnsAsync(new User("", "", ""));
+                .ReturnsAsync(new User("", "", new EmailAddress("", "")));
             var input = new LoginInput();
 
             // Act
@@ -109,7 +109,7 @@ namespace Sinuka.Tests.UnitTests.Application.UseCases
                 .Returns(new Client("", "", "", "", "")); 
             this._mockUserRepo
                 .Setup(x => x.CheckCredentials(It.IsAny<string>(), It.IsAny<string>()))
-                .ReturnsAsync(new User("", "", ""));
+                .ReturnsAsync(new User("", "", new EmailAddress("", "")));
             var input = new LoginInput();
 
             // Act

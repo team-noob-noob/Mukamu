@@ -53,7 +53,7 @@ namespace Sinuka.Tests.UnitTests.Application
                 .Returns(new RefreshToken("TEST2", DateTime.Now + new TimeSpan(2, 0, 0)));
             this._mockSessionFact
                 .Setup(x => x.CreateSession(It.IsAny<User>()))
-                .Returns(new Session(new User("", "", ""), new SessionToken("TEST", DateTime.Now + new TimeSpan(2, 0, 0))));
+                .Returns(new Session(new User("", "", new EmailAddress("", "")), new SessionToken("TEST", DateTime.Now + new TimeSpan(2, 0, 0))));
             var input = new RefreshInput();
 
             // Act

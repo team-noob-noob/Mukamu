@@ -27,7 +27,7 @@ namespace Sinuka.Infrastructure.Database.Repositories
         {
             var result = await Task.FromResult(
                 this._dbContext.Users.FirstOrDefault(
-                    u => !u.DeletedAt.HasValue && u.Email == email)
+                    u => !u.DeletedAt.HasValue && u.Email.Email == email)
                     
             );
             return result;

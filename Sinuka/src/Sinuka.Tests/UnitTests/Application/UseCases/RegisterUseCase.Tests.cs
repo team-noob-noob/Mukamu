@@ -42,7 +42,7 @@ namespace Sinuka.Tests.UnitTests.Application
         public async Task RegisterUseCaseShouldCallUserNameIsTaken_IfUsernameTaken()
         {
             // Arrange
-            this._mockUserRepo.Setup(x => x.FindUserByUsername(It.IsAny<string>())).ReturnsAsync(new User("", "", ""));
+            this._mockUserRepo.Setup(x => x.FindUserByUsername(It.IsAny<string>())).ReturnsAsync(new User("", "", new EmailAddress("", "")));
             var input = new RegisterInput();
 
             // Act
@@ -57,7 +57,7 @@ namespace Sinuka.Tests.UnitTests.Application
         {
             // Arrange
             this._mockUserRepo.Setup(x => x.FindUserByUsername(It.IsAny<string>())).ReturnsAsync(null as User);
-            this._mockUserRepo.Setup(x => x.FindUserByEmail(It.IsAny<string>())).ReturnsAsync(new User("", "", ""));
+            this._mockUserRepo.Setup(x => x.FindUserByEmail(It.IsAny<string>())).ReturnsAsync(new User("", "", new EmailAddress("", "")));
             var input = new RegisterInput();
 
             // Act
