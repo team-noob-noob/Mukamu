@@ -38,21 +38,6 @@ namespace Sinuka.WebAPIs
             });
             services.AddUseCases();
             services.AddMySqlServer();
-            
-            // TODO: Needs to move
-            // var options =
-            //     new MySqlStorageOptions {
-            //         QueuePollInterval = TimeSpan.FromSeconds(15),
-            //         JobExpirationCheckInterval = TimeSpan.FromHours(1),
-            //         CountersAggregateInterval = TimeSpan.FromMinutes(5),
-            //         PrepareSchemaIfNecessary = true,
-            //         DashboardJobListLimit = 50000,
-            //         TransactionTimeout = TimeSpan.FromMinutes(1),
-            //         TablesPrefix = "Hangfire"
-            //     };
-            // var storage = new MySqlStorage(Sinuka.Infrastructure.Configurations.DbConfig.DbConnectionString, options);
-            // services.AddHangfire(x => x.UseStorage(storage));
-            // services.AddHangfireServer();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

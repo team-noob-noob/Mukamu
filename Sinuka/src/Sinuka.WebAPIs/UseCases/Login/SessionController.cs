@@ -15,12 +15,10 @@ namespace Sinuka.WebAPIs.UseCases.Login
     {
         private IActionResult _viewModel;
         private readonly ILoginUseCase _useCase;
-        private readonly IBackgroundJobClient _jobClient;
 
-        public SessionController(ILoginUseCase useCase, IBackgroundJobClient jobClient)
+        public SessionController(ILoginUseCase useCase)
         {
             this._useCase = useCase;
-            this._jobClient = jobClient;
         }
 
         void ILoginPresenter.IncorrectCredentials()
