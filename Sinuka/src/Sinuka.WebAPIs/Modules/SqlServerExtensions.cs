@@ -23,6 +23,8 @@ namespace Sinuka.WebAPIs.Modules
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<ISessionRepository, SessionRepository>();
             services.AddScoped<IClientRepository, ClientRepository>();
+            services.AddScoped<IRoleRepository, RoleRepository>();
+            services.AddScoped<IEmailAddressRepository, EmailAddressRepository>();
 
             return services;
         }

@@ -4,13 +4,13 @@ using Sinuka.Application.Interfaces;
 
 namespace Sinuka.Application.UseCases.VerifyEmail
 {
-    public class VerifyUseCase : IVerifyEmailUseCase
+    public class VerifyEmailUseCase : IVerifyEmailUseCase
     {
         private IVerifyEmailPresenter _presenter;
         private readonly IEmailAddressRepository _emailRepo;
         private readonly IUnitOfWork _unitOfWork;
 
-        public VerifyUseCase(
+        public VerifyEmailUseCase(
             IEmailAddressRepository emailAddressRepository,
             IUnitOfWork unitOfWork
         )
