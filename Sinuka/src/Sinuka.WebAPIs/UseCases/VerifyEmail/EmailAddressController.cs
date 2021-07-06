@@ -12,6 +12,9 @@ namespace Sinuka.WebAPIs.UseCases.VerifyEmail
         private readonly IVerifyEmailUseCase _useCase;
         private IActionResult? _viewModel;
 
+        public EmailAddressController(IVerifyEmailUseCase useCase)
+            => this._useCase = useCase;
+
         void IVerifyEmailPresenter.Done()
             => this._viewModel = this.Ok(new { message = "Email Verified" });
 
