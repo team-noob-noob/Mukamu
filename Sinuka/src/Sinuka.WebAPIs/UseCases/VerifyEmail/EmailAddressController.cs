@@ -21,7 +21,8 @@ namespace Sinuka.WebAPIs.UseCases.VerifyEmail
         void IVerifyEmailPresenter.InvalidVerifyString()
             => this._viewModel = this.BadRequest(new { message = "Invalid Verification String" });
 
-        public async Task<IActionResult> VerifyEmail([FromBody] VerifyEmailInput input)
+        [HttpGet]
+        public async Task<IActionResult> VerifyEmail([FromQuery] VerifyEmailInput input)
         {
             var result = new VerifyEmailInputValidation().Validate(input);
             if(!result.IsValid)
