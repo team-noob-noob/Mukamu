@@ -1,5 +1,5 @@
 using System;
-using Moq;
+using FluentAssertions;
 using NUnit.Framework;
 using Sinuka.Core.Models;
 
@@ -26,7 +26,7 @@ namespace Sinuka.Tests.UnitTests.Core.Models
             var result = this._sut.IsExpired();
 
             // Assert
-            Assert.AreEqual(true, result);
+            result.Should().BeTrue();
         }
 
         [Test]
@@ -39,7 +39,7 @@ namespace Sinuka.Tests.UnitTests.Core.Models
             var result = this._sut.IsExpired();
 
             // Assert
-            Assert.AreEqual(false, result);
+            result.Should().BeFalse();
         }
     }
 }
