@@ -6,6 +6,7 @@ using Sinuka.Application.Interfaces;
 using Sinuka.Application.UseCases.Register;
 using Sinuka.Core.Interfaces.Repositories;
 using Sinuka.Core.Interfaces.Factories;
+using Sinuka.Core.Interfaces.Services;
 using Sinuka.Core.Models;
 
 namespace Sinuka.Tests.UnitTests.Application
@@ -17,6 +18,7 @@ namespace Sinuka.Tests.UnitTests.Application
         private Mock<IUserRepository> _mockUserRepo;
         private Mock<IUserFactory> _mockUserFact;
         private Mock<IUnitOfWork> _mockUnitOfWork;
+        private Mock<IEmailService> _mockEmailService;
         private Mock<IRegisterPresenter> _mockPresenter;
 
         [SetUp]
@@ -30,6 +32,7 @@ namespace Sinuka.Tests.UnitTests.Application
             this._sut = new RegisterUseCase(
                 this._mockUserRepo.Object,
                 this._mockUserFact.Object,
+                this._mockEmailService.Object,
                 this._mockUnitOfWork.Object 
             );
 
@@ -80,6 +83,7 @@ namespace Sinuka.Tests.UnitTests.Application
 
             // Assert
             this._mockPresenter.Verify(x => x.UserCreated());
+            this._mockEmailService.Verify(x => x.SendEmail(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()));
         }
     }
 }
