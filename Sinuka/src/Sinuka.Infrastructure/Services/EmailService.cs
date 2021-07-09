@@ -24,7 +24,10 @@ namespace Sinuka.Infrastructure.Services
                 Host = "smtp.gmail.com",
                 EnableSsl = true,
                 UseDefaultCredentials = false,
-                Credentials = new NetworkCredential("", ""),
+                Credentials = new NetworkCredential(
+                   Sinuka.Infrastructure.Configurations.EmailConfig.Username, 
+                   Sinuka.Infrastructure.Configurations.EmailConfig.Password
+                ),
                 DeliveryMethod = SmtpDeliveryMethod.Network
             };
             await Task.Run(() => smtp.Send(mailMessage));
