@@ -48,7 +48,7 @@ namespace Sinuka.Application.UseCases.Register
 
             await this._emailService.SendEmail(
                 user.Email.Email, 
-                $"localhost:8080/emailAddress/verifyEmail/{user.Email.VerificationString}", 
+                VerifyEmailTemplate.Template($"localhost:8080/emailAddress/verifyEmail/{user.Email.VerificationString}"), 
                 "Verify Email"
             );
 

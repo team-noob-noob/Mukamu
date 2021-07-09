@@ -13,6 +13,7 @@ namespace Sinuka.Infrastructure.Services
             {
                 From = new MailAddress("DONOTREPLY@gmail.com"),
                 Subject = subject,
+                IsBodyHtml = true,
                 Body = message
             }; 
             
