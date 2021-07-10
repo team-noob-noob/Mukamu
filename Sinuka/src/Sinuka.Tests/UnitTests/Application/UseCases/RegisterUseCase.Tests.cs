@@ -28,6 +28,7 @@ namespace Sinuka.Tests.UnitTests.Application
             this._mockUserFact = new Mock<IUserFactory>();
             this._mockUnitOfWork = new Mock<IUnitOfWork>();
             this._mockPresenter = new Mock<IRegisterPresenter>();
+            this._mockEmailService = new Mock<IEmailService>();
             
             this._sut = new RegisterUseCase(
                 this._mockUserRepo.Object,
