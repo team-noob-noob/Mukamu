@@ -1,6 +1,7 @@
 using System;
 using Sinuka.Infrastructure.Security;
 using Sinuka.Core.Interfaces.Factories;
+using Sinuka.Core.Interfaces.Services;
 using Sinuka.Core.Models;
 using Sinuka.Infrastructure.Cryptography;
 using System.Dynamic;
@@ -14,10 +15,14 @@ namespace Sinuka.Infrastructure.Database
     IRefreshTokenFactory,
     IPasswordResetFactory
     {
+        private readonly IHashingService _hashingService;
+
+        public ModelFactory(IHashingService hashingService)
+            => this._hashingService = hashingService;
+
         public User CreateUser(string username, string password, string email)
         {
-            // TODO: Move the '7' to configurations as part of SecurityConfigs or something
-            var hashedPassword = BCrypt.Net.BCrypt.EnhancedHashPassword(password, 7);
+            var hashedPassword = this._hashingService.Hash(password);
             var token = KeyGenerator.GetUniqueKeyOriginal_BIASED(
                 Sinuka.Infrastructure.Configurations.TokenConfig.RefreshTokenLength
             );
