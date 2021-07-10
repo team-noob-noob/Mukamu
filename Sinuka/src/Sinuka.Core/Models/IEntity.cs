@@ -4,7 +4,7 @@ namespace Sinuka.Core.Models
 {
     public interface IEntity
     {
-        public Guid Id { get; set; }
+        Guid Id { get; set; }
 
         DateTime CreatedAt { get; set; }
         DateTime UpdatedAt { get; set; }
