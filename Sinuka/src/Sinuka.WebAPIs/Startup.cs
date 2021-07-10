@@ -38,6 +38,7 @@ namespace Sinuka.WebAPIs
             });
             services.AddUseCases();
             services.AddMySqlServer();
+            services.AddServices();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

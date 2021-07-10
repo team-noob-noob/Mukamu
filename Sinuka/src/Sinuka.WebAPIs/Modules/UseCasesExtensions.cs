@@ -5,6 +5,7 @@ using Sinuka.Application.UseCases.Authorization;
 using Sinuka.Application.UseCases.Logout;
 using Sinuka.Application.UseCases.Refresh;
 using Sinuka.Application.UseCases.VerifyEmail;
+using Sinuka.Application.UseCases.SendPasswordReset;
 
 namespace Sinuka.WebAPIs.Modules
 {
@@ -18,6 +19,7 @@ namespace Sinuka.WebAPIs.Modules
             services.AddScoped<ILogoutUseCase, LogoutUseCase>();
             services.AddScoped<IRefreshUseCase, RefreshUseCase>();
             services.AddScoped<IVerifyEmailUseCase, VerifyEmailUseCase>();
+            services.AddScoped<ISendPasswordResetUseCase, SendPasswordResetUseCase>();
 
             return services;
         }
