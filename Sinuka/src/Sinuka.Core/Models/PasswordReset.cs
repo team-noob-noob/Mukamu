@@ -4,6 +4,7 @@ namespace Sinuka.Core.Models
 {
     public class PasswordReset : IEntity
     {
+        public PasswordReset() {}
         public PasswordReset(User user, string resetToken, DateTime expiresAt)
         {
             this.User = user;
