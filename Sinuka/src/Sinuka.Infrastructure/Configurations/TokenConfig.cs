@@ -4,6 +4,7 @@ namespace Sinuka.Infrastructure.Configurations
 {
     public class TokenConfig
     {
+        public static TimeSpan ResetTokenLifetimeLength = new TimeSpan(1, 0, 0);
         public static int RefreshTokenLength = 300;
         public static TimeSpan RefreshTokenLifetimeLength = new TimeSpan(30, 0, 0, 0);
         public static TimeSpan SessionTokenLifetimeLength = new TimeSpan(1, 0, 0);

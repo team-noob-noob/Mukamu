@@ -19,12 +19,14 @@ namespace Sinuka.WebAPIs.Modules
             services.AddSingleton<ISessionFactory, ModelFactory>();
             services.AddSingleton<ISessionTokenFactory, ModelFactory>();
             services.AddSingleton<IRefreshTokenFactory, ModelFactory>();
+            services.AddSingleton<IPasswordResetFactory, ModelFactory>();
 
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<ISessionRepository, SessionRepository>();
             services.AddScoped<IClientRepository, ClientRepository>();
             services.AddScoped<IRoleRepository, RoleRepository>();
             services.AddScoped<IEmailAddressRepository, EmailAddressRepository>();
+            services.AddScoped<IPasswordResetRepository, PasswordResetRepository>();
 
             return services;
         }

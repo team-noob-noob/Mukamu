@@ -11,7 +11,8 @@ namespace Sinuka.Infrastructure.Database
     IUserFactory, 
     ISessionFactory,
     ISessionTokenFactory,
-    IRefreshTokenFactory
+    IRefreshTokenFactory,
+    IPasswordResetFactory
     {
         public User CreateUser(string username, string password, string email)
         {
@@ -48,6 +49,16 @@ namespace Sinuka.Infrastructure.Database
             var expiresAt = DateTime.Now 
                 + Sinuka.Infrastructure.Configurations.TokenConfig.RefreshTokenLifetimeLength;
             return new RefreshToken(token, expiresAt);
+        }
+
+        public PasswordReset CreatePasswordReset(User user)
+        {
+            var token = KeyGenerator.GetUniqueKeyOriginal_BIASED(
+                Sinuka.Infrastructure.Configurations.TokenConfig.RefreshTokenLength
+            );
+            var expiresAt = DateTime.Now 
+                + Sinuka.Infrastructure.Configurations.TokenConfig.ResetTokenLifetimeLength;
+            return new PasswordReset(user, token, expiresAt);
         }
     }
 }
