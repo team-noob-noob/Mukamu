@@ -7,10 +7,8 @@ on:
     branches: [ main ]
 
 jobs:
-  build:
-
+  Test Sinuka:
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v2
     - name: Setup .NET
@@ -23,6 +21,15 @@ jobs:
       run: cd Sinuka && dotnet build --no-restore
     - name: Sinuka - Test
       run: cd Sinuka && dotnet test --no-build --verbosity normal
+    
+  Test Mukamu:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 5.0.x
     - name: Mukamu - Restore dependencies
       run: dotnet restore
     - name: Mukamu - Build
