@@ -48,7 +48,10 @@ namespace Sinuka.WebAPIs
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Sinuka.WebAPIs v1"));
+                app.UseSwaggerUI(c => {
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Sinuka.WebAPIs v1");
+                    c.RoutePrefix = "";
+                });
             }
 
             app.UseHttpsRedirection();
