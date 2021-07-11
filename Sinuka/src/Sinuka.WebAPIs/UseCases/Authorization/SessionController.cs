@@ -22,7 +22,7 @@ namespace Sinuka.WebAPIs.UseCases.Authorization
             => this._viewModel = this.Ok(new { IsTokenValid = true });
 
         [HttpGet]
-        public async Task<IActionResult> Authorize([FromBody] AuthorizationInput input)
+        public async Task<IActionResult> Authorize([FromQuery] AuthorizationInput input)
         {
             var result = new AuthorizationInputValidation().Validate(input);
             if(!result.IsValid)
