@@ -15,11 +15,11 @@ namespace Sinuka.WebAPIs.Modules
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
-            services.AddSingleton<IUserFactory, ModelFactory>();
-            services.AddSingleton<ISessionFactory, ModelFactory>();
-            services.AddSingleton<ISessionTokenFactory, ModelFactory>();
-            services.AddSingleton<IRefreshTokenFactory, ModelFactory>();
-            services.AddSingleton<IPasswordResetFactory, ModelFactory>();
+            services.AddScoped<IUserFactory, ModelFactory>();
+            services.AddScoped<ISessionFactory, ModelFactory>();
+            services.AddScoped<ISessionTokenFactory, ModelFactory>();
+            services.AddScoped<IRefreshTokenFactory, ModelFactory>();
+            services.AddScoped<IPasswordResetFactory, ModelFactory>();
 
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<ISessionRepository, SessionRepository>();
