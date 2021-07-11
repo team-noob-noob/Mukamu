@@ -4,6 +4,7 @@
 - Dotnet Core
 - MySQL
 - Dotnet-ef CLI
+    - To install <code>dotnet tool install --global dotnet-ef</code>
 
 ## Setup
 1. Create Database 'sinukaka'
