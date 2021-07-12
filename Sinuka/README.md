@@ -13,4 +13,4 @@
 2. Run migrations
     - <code>dotnet ef database update --project ./src/Sinuka.Infrastructure</code>
 3. Run App
-    - <code>dotnet run --project ./src/Sinuka.</code>
+    - <code>dotnet run --project ./src/Sinuka.WebAPIs</code>
