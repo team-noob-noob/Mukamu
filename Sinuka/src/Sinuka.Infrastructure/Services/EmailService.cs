@@ -9,29 +9,35 @@ namespace Sinuka.Infrastructure.Services
     {
         public async Task SendEmail(string to, string message, string subject)
         {
-            MailMessage mailMessage = new MailMessage()
+            if (
+                !string.IsNullOrEmpty(Sinuka.Infrastructure.Configurations.EmailConfig.Username)
+                || !string.IsNullOrEmpty(Sinuka.Infrastructure.Configurations.EmailConfig.Password)
+            )
             {
-                From = new MailAddress("DONOTREPLY@gmail.com"),
-                Subject = subject,
-                IsBodyHtml = true,
-                Body = message
-            }; 
-            
-            mailMessage.To.Add(new MailAddress(to));  
+                MailMessage mailMessage = new MailMessage()
+                {
+                    From = new MailAddress("DONOTREPLY@gmail.com"),
+                    Subject = subject,
+                    IsBodyHtml = true,
+                    Body = message
+                };
 
-            SmtpClient smtp = new SmtpClient() 
-            {
-                Port = 587,
-                Host = "smtp.gmail.com",
-                EnableSsl = true,
-                UseDefaultCredentials = false,
-                Credentials = new NetworkCredential(
-                   Sinuka.Infrastructure.Configurations.EmailConfig.Username, 
-                   Sinuka.Infrastructure.Configurations.EmailConfig.Password
-                ),
-                DeliveryMethod = SmtpDeliveryMethod.Network
-            };
-            await Task.Run(() => smtp.Send(mailMessage));
+                mailMessage.To.Add(new MailAddress(to));
+
+                SmtpClient smtp = new SmtpClient()
+                {
+                    Port = 587,
+                    Host = "smtp.gmail.com",
+                    EnableSsl = true,
+                    UseDefaultCredentials = false,
+                    Credentials = new NetworkCredential(
+                       Sinuka.Infrastructure.Configurations.EmailConfig.Username,
+                       Sinuka.Infrastructure.Configurations.EmailConfig.Password
+                    ),
+                    DeliveryMethod = SmtpDeliveryMethod.Network
+                };
+                await Task.Run(() => smtp.Send(mailMessage));
+            }
         }
     }
 }
