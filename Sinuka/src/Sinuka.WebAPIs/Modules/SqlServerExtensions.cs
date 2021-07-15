@@ -1,4 +1,5 @@
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.EntityFrameworkCore;
 using Sinuka.Application.Interfaces;
 using Sinuka.Infrastructure.Database;
 using Sinuka.Infrastructure.Database.Repositories;
@@ -11,7 +12,7 @@ namespace Sinuka.WebAPIs.Modules
     {
         public static IServiceCollection AddMySqlServer(this IServiceCollection services)
         {
-            services.AddDbContext<SinukaDbContext>();
+            services.AddDbContext<SinukaDbContext>(b => b.UseLazyLoadingProxies());
             services.AddScoped<ISinukaDbContext>(provider => provider.GetService<SinukaDbContext>());
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
