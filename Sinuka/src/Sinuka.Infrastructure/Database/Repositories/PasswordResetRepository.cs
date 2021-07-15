@@ -7,9 +7,9 @@ namespace Sinuka.Infrastructure.Database.Repositories
 {
     public class PasswordResetRepository : IPasswordResetRepository
     {
-        private SinukaDbContext _dbContext;
+        private ISinukaDbContext _dbContext;
 
-        public PasswordResetRepository(SinukaDbContext dbContext)
+        public PasswordResetRepository(ISinukaDbContext dbContext)
             => this._dbContext = dbContext;
 
         public async Task AddResetPassword(PasswordReset passwordReset)

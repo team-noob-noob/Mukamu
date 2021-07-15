@@ -8,9 +8,9 @@ namespace Sinuka.Infrastructure.Database.Repositories
 {
     public class ClientRepository : IClientRepository
     {
-        private readonly SinukaDbContext _dbContext;
+        private readonly ISinukaDbContext _dbContext;
 
-        public ClientRepository(SinukaDbContext dbContext)
+        public ClientRepository(ISinukaDbContext dbContext)
             => this._dbContext = dbContext;
         
         public Client? VerifyClientData(Guid id, string name, string secret)

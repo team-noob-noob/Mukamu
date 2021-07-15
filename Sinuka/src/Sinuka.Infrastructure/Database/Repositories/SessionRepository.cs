@@ -7,9 +7,9 @@ namespace Sinuka.Infrastructure.Database.Repositories
 {
     public class SessionRepository : ISessionRepository
     {
-        private readonly SinukaDbContext _dbContext;
+        private readonly ISinukaDbContext _dbContext;
 
-        public SessionRepository(SinukaDbContext dbContext)
+        public SessionRepository(ISinukaDbContext dbContext)
             => this._dbContext = dbContext;
 
         public async Task AddSession(Session session)
@@ -34,6 +34,6 @@ namespace Sinuka.Infrastructure.Database.Repositories
         }
 
         public void RemoveSession(Session session)
-            => this._dbContext.Remove(session);
+            => this._dbContext.Sessions.Remove(session);
     }
 }

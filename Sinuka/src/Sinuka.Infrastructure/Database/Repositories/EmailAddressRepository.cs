@@ -7,9 +7,9 @@ namespace Sinuka.Infrastructure.Database.Repositories
 {
     public class EmailAddressRepository : IEmailAddressRepository
     {
-        private readonly SinukaDbContext _dbContext;
+        private readonly ISinukaDbContext _dbContext;
 
-        public EmailAddressRepository(SinukaDbContext dbContext)
+        public EmailAddressRepository(ISinukaDbContext dbContext)
             => this._dbContext = dbContext;
 
         public async Task<EmailAddress?> GetEmailAddressByVerificationString(string verificationString)

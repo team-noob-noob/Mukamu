@@ -8,10 +8,10 @@ namespace Sinuka.Infrastructure.Database.Repositories
 {
     public class UserRepository : IUserRepository
     {
-        private readonly SinukaDbContext _dbContext;
+        private readonly ISinukaDbContext _dbContext;
         private readonly IHashingService _hashingService;
 
-        public UserRepository(SinukaDbContext dbContext, IHashingService hashingService)
+        public UserRepository(ISinukaDbContext dbContext, IHashingService hashingService)
         {
             this._dbContext = dbContext;
             this._hashingService = hashingService;

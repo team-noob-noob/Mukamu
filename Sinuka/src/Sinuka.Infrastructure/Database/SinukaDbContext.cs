@@ -6,7 +6,7 @@ using Sinuka.Core.Models;
 
 namespace Sinuka.Infrastructure.Database
 {
-    public class SinukaDbContext : DbContext
+    public class SinukaDbContext : DbContext, ISinukaDbContext
     {
         public DbSet<User> Users { get; set; }
         public DbSet<Session> Sessions { get; set; }

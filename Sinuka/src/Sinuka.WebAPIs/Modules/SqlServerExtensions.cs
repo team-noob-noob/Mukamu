@@ -12,6 +12,7 @@ namespace Sinuka.WebAPIs.Modules
         public static IServiceCollection AddMySqlServer(this IServiceCollection services)
         {
             services.AddDbContext<SinukaDbContext>();
+            services.AddScoped<ISinukaDbContext>(provider => provider.GetService<SinukaDbContext>());
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 

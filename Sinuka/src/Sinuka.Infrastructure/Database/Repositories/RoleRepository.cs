@@ -6,9 +6,9 @@ namespace Sinuka.Infrastructure.Database.Repositories
 {
     public class RoleRepository : IRoleRepository
     {
-        private readonly SinukaDbContext _dbContext;
+        private readonly ISinukaDbContext _dbContext;
 
-        public RoleRepository(SinukaDbContext dbContext)
+        public RoleRepository(ISinukaDbContext dbContext)
             => this._dbContext = dbContext;
 
         public async Task AddRole(Role newRole)
