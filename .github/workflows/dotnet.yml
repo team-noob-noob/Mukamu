@@ -7,7 +7,30 @@ on:
     branches: [ main ]
 
 jobs:
-  Test_Sinuka:
+  E2ETest_Sinuka:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 5.0.x
+      - uses: mirromutth/mysql-action@v1.1
+        with:
+          mysql version: '5.7.32'
+          mysql database: 'sinukaka'
+          mysql root password: 'root'
+      - name: Update database
+        run: |
+          dotnet tool install --global dotnet-ef
+          dotnet tool restore
+          dotnet ef database update --p ./Sinuka/src/Sinuka.Infrastructure
+      - name: Start Sinuka
+        run: dotnet run --project ./Sinuka/src/Sinuka.WebAPIs
+      - uses: matt-ball/newman-action@master
+        with:
+          collection: postman_collection.json
+
+  UnitTest_Sinuka:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -22,7 +45,7 @@ jobs:
     - name: Sinuka - Test
       run: cd Sinuka && dotnet test --no-build --verbosity normal
     
-  Test_Mukamu:
+  UnitTest_Mukamu:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
