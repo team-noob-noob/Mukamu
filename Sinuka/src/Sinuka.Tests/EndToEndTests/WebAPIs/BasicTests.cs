@@ -5,7 +5,7 @@ using Sinuka.WebAPIs;
 namespace Sinuka.Tests.EndToEndTests
 {
     [TestFixture, Category("e2e")]
-    public class WeatherForecastTests
+    public class BasicTests
     {
         private CustomWebApplicationFactory<Startup> _factory;
 
