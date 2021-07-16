@@ -23,7 +23,7 @@ jobs:
         run: |
           dotnet tool install --global dotnet-ef
           dotnet tool restore
-          dotnet ef database update --p ./Sinuka/src/Sinuka.Infrastructure
+          dotnet ef database update --project ./Sinuka/src/Sinuka.Infrastructure
       - name: Start Sinuka
         run: dotnet run --project ./Sinuka/src/Sinuka.WebAPIs
       - uses: matt-ball/newman-action@master
