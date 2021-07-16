@@ -82,7 +82,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"ClientId\": \"69a29c6d-80b1-4c7b-a08b-38c7a27aaf4d\",\r\n    \"ClientName\": \"TEST\",\r\n    \"ClientSecret\": \"TEST\",\r\n    \"username\": \"username\",\r\n    \"password\": \"password\",\r\n    \"RememberLogin\": true\r\n}",
+					"raw": "{\r\n    \"ClientId\": \"69a29c6d-80b1-4c7b-a08b-38c7a27aaf4d\",\r\n    \"ClientName\": \"TEST\",\r\n    \"ClientSecret\": \"TEST\",\r\n    \"username\": \"{{username}}\",\r\n    \"password\": \"{{password}}\",\r\n    \"RememberLogin\": true\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -218,7 +218,7 @@
 							"        throw error;\r",
 							"    const data = response.json();\r",
 							"    console.log(data);\r",
-							"    pm.collectionVariables.set(\"sessionToken\", data.session_token);\r",
+							"    pm.collectionVariables.set(\"refreshToken\", data.refresh_token);\r",
 							"})\r",
 							"\r",
 							""
