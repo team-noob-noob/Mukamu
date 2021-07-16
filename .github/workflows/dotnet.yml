@@ -27,7 +27,7 @@ jobs:
       - name: Run migrations to DB
         run: cd Sinuka && dotnet ef database update --project ./src/Sinuka.Infrastructure
       - name: Start Sinuka
-        run: cd Sinuka && dotnet run --project ./src/Sinuka.WebAPIs
+        run: cd Sinuka && nohup dotnet run --project ./src/Sinuka.WebAPIs
       - name: Run Newman E2E
         uses: matt-ball/newman-action@master
         with:
