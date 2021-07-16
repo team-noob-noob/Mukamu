@@ -11,6 +11,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14'
       - name: Setup .NET
         uses: actions/setup-dotnet@v1
         with:
@@ -20,18 +23,18 @@ jobs:
           mysql version: '5.7.32'
           mysql database: 'sinukaka'
           mysql root password: 'root'
+      - name: Install Newman
+        run: npm install newman -g
       - name: Install dotnet-ef
         run: dotnet tool install --global dotnet-ef
       - name: Restore Sinuka
         run: cd Sinuka && dotnet restore 
       - name: Run migrations to DB
         run: cd Sinuka && dotnet ef database update --project ./src/Sinuka.Infrastructure
-      - name: Start Sinuka
-        run: cd Sinuka && dotnet run --project ./src/Sinuka.WebAPIs &
-      - name: Run Newman E2E
-        uses: matt-ball/newman-action@master
-        with:
-          collection: ./Sinuka/Sinukaka.postman_collection.json
+      - name: Start Sinuka and Run E2E Tests
+        run: | 
+          cd Sinuka && dotnet run --project ./src/Sinuka.WebAPIs &
+          newman run ./Sinukaka.postman_collection.json --insecure
 
   UnitTest_Sinuka:
     runs-on: ubuntu-latest
