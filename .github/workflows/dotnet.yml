@@ -10,6 +10,7 @@ jobs:
   E2ETest_Sinuka:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
       - name: Setup .NET
         uses: actions/setup-dotnet@v1
         with:
@@ -25,7 +26,8 @@ jobs:
         run: cd Sinuka && dotnet tool restore && dotnet ef database update --no-restore
       - name: Start Sinuka
         run: cd Sinuka && dotnet run --project ./src/Sinuka.WebAPIs
-      - uses: matt-ball/newman-action@master
+      - name: Run Newman E2E
+        uses: matt-ball/newman-action@master
         with:
           collection: postman_collection.json
 
