@@ -27,7 +27,7 @@ namespace Sinuka.Application.UseCases.Logout
                 this._sessionRepo.RemoveSession(session);
                 await this._unitOfWork.Save();
 
-                if(session.Client.PostLogoutRedirect is not null)
+                if(session.Client?.PostLogoutRedirect is not null)
                 {
                     this._presenter.Redirect(session.Client.PostLogoutRedirect);
                     return;
