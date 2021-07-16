@@ -19,17 +19,12 @@ jobs:
           mysql version: '5.7.32'
           mysql database: 'sinukaka'
           mysql root password: 'root'
-      - name: Update database
-        run: |
-          dotnet tool install --global dotnet-ef
-          pwd
-          ls
-          cd Sinuka
-          pwd
-          dotnet tool restore
-          dotnet ef database update 
+      - name: Install dotnet-ef
+        run: dotnet tool install --global dotnet-ef
+      - name: Restore Database
+        run: cd Sinuka && dotnet tool restore && dotnet ef database update --no-restore
       - name: Start Sinuka
-        run: dotnet run --project ./Sinuka/src/Sinuka.WebAPIs
+        run: cd Sinuka && dotnet run --project ./src/Sinuka.WebAPIs
       - uses: matt-ball/newman-action@master
         with:
           collection: postman_collection.json
