@@ -34,7 +34,7 @@ jobs:
       - name: Start Sinuka and Run E2E Tests
         run: | 
           cd Sinuka && dotnet run --project ./src/Sinuka.WebAPIs &
-          pwd
+          sleep 5
           cd Sinuka && newman run ./Sinukaka.postman_collection.json --insecure
 
   UnitTest_Sinuka:
