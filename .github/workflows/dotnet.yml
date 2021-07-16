@@ -22,14 +22,16 @@ jobs:
           mysql root password: 'root'
       - name: Install dotnet-ef
         run: dotnet tool install --global dotnet-ef
-      - name: Restore Database
-        run: cd Sinuka && dotnet tool restore && dotnet ef database update --no-restore
+      - name: Restore Sinuka
+        run: cd Sinuka && dotnet restore 
+      - name: Run migrations to DB
+        run: cd Sinuka && dotnet ef database update --no-restore --project ./src/Sinuka.Infrastructure
       - name: Start Sinuka
         run: cd Sinuka && dotnet run --project ./src/Sinuka.WebAPIs
       - name: Run Newman E2E
         uses: matt-ball/newman-action@master
         with:
-          collection: postman_collection.json
+          collection: ./Sinuka/Sinukaka.postman_collection.json
 
   UnitTest_Sinuka:
     runs-on: ubuntu-latest
