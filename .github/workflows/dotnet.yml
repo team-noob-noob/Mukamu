@@ -25,7 +25,7 @@ jobs:
       - name: Restore Sinuka
         run: cd Sinuka && dotnet restore 
       - name: Run migrations to DB
-        run: cd Sinuka && dotnet ef database update --no-restore --project ./src/Sinuka.Infrastructure
+        run: cd Sinuka && dotnet ef database update --project ./src/Sinuka.Infrastructure
       - name: Start Sinuka
         run: cd Sinuka && dotnet run --project ./src/Sinuka.WebAPIs
       - name: Run Newman E2E
