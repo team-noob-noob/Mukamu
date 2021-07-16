@@ -19,7 +19,7 @@ namespace Sinuka.Tests.EndToEndTests
             {
                 var descriptor = services.SingleOrDefault(d => d.ServiceType == typeof(DbContextOptions<SinukaDbContext>));
                 services.Remove(descriptor);
-                services.AddDbContext<SinukaDbContext>(options =>
+                services.AddDbContext<SinukaTestDbContext>(options =>
                 {
                     options.UseInMemoryDatabase("InMemoryDbForTesting");
                 });
@@ -28,7 +28,7 @@ namespace Sinuka.Tests.EndToEndTests
                 using (var scope = sp.CreateScope())
                 {
                     var scopedServices = scope.ServiceProvider;
-                    var db = scopedServices.GetRequiredService<SinukaDbContext>();
+                    var db = scopedServices.GetRequiredService<SinukaTestDbContext>();
                     var logger = scopedServices.GetRequiredService<ILogger<CustomWebApplicationFactory<TStartup>>>();
 
                     try
@@ -40,6 +40,7 @@ namespace Sinuka.Tests.EndToEndTests
                     {
                         logger.LogError(ex, "An error occurred seeding the " +
                         "database with test messages. Error: {Message}", ex.Message);
+                        throw;
                     }
                 }
             });
