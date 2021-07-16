@@ -1,0 +1,368 @@
+{
+	"info": {
+		"_postman_id": "9eaff2c3-4213-4829-9679-54083dc626b0",
+		"name": "Sinukaka",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/user/register",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200]);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"{{$randomEmail}}\",\r\n    \"password\": \"{{$randomUserName}}\",\r\n    \"username\": \"{{$randomPassword}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{host}}/user/register",
+					"protocol": "https",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"user",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/session/login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200]);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"ClientId\": \"69a29c6d-80b1-4c7b-a08b-38c7a27aaf4d\",\r\n    \"ClientName\": \"TEST\",\r\n    \"ClientSecret\": \"TEST\",\r\n    \"username\": \"username\",\r\n    \"password\": \"password\",\r\n    \"RememberLogin\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{host}}/session/login",
+					"protocol": "https",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"session",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/session/authorize",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"\r",
+							"\r",
+							"const host = pm.collectionVariables.get(\"host\");\r",
+							"const postRequest = {\r",
+							"    url: `https://${host}/session/login`,\r",
+							"    method: 'POST',\r",
+							"    header: {\r",
+							"        'Content-Type': 'application/json',\r",
+							"    },\r",
+							"    body: {\r",
+							"        mode: \"raw\",\r",
+							"        raw: JSON.stringify({\r",
+							"            \"ClientId\": \"69a29c6d-80b1-4c7b-a08b-38c7a27aaf4d\",\r",
+							"            \"ClientName\": \"TEST\",\r",
+							"            \"ClientSecret\": \"TEST\",\r",
+							"            \"username\": \"username\",\r",
+							"            \"password\": \"password\",\r",
+							"            \"RememberLogin\": true\r",
+							"        })\r",
+							"    }\r",
+							"};\r",
+							"\r",
+							"\r",
+							"pm.sendRequest(postRequest, (error, response) => {\r",
+							"    if (error) \r",
+							"        throw error;\r",
+							"    const data = response.json();\r",
+							"    console.log(data);\r",
+							"    pm.collectionVariables.set(\"sessionToken\", data.session_token);\r",
+							"})\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200]);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://{{host}}/session/authorize?Token={{sessionToken}}",
+					"protocol": "https",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"session",
+						"authorize"
+					],
+					"query": [
+						{
+							"key": "Token",
+							"value": "{{sessionToken}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/session/refresh",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"\r",
+							"\r",
+							"const host = pm.collectionVariables.get(\"host\");\r",
+							"const postRequest = {\r",
+							"    url: `https://${host}/session/login`,\r",
+							"    method: 'POST',\r",
+							"    header: {\r",
+							"        'Content-Type': 'application/json',\r",
+							"    },\r",
+							"    body: {\r",
+							"        mode: \"raw\",\r",
+							"        raw: JSON.stringify({\r",
+							"            \"ClientId\": \"69a29c6d-80b1-4c7b-a08b-38c7a27aaf4d\",\r",
+							"            \"ClientName\": \"TEST\",\r",
+							"            \"ClientSecret\": \"TEST\",\r",
+							"            \"username\": \"username\",\r",
+							"            \"password\": \"password\",\r",
+							"            \"RememberLogin\": true\r",
+							"        })\r",
+							"    }\r",
+							"};\r",
+							"\r",
+							"\r",
+							"\r",
+							"pm.sendRequest(postRequest, (error, response) => {\r",
+							"    if (error) \r",
+							"        throw error;\r",
+							"    const data = response.json();\r",
+							"    console.log(data);\r",
+							"    pm.collectionVariables.set(\"refreshToken\", data.refresh_token);\r",
+							"});\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful PUT request\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200]);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"RefreshToken\": \"{{refreshToken}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{host}}/session/refresh",
+					"protocol": "https",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"session",
+						"refresh"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/session/logout",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200]);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"\r",
+							"\r",
+							"const host = pm.collectionVariables.get(\"host\");\r",
+							"const postRequest = {\r",
+							"    url: `https://${host}/session/login`,\r",
+							"    method: 'POST',\r",
+							"    header: {\r",
+							"        'Content-Type': 'application/json',\r",
+							"    },\r",
+							"    body: {\r",
+							"        mode: \"raw\",\r",
+							"        raw: JSON.stringify({\r",
+							"            \"ClientId\": \"69a29c6d-80b1-4c7b-a08b-38c7a27aaf4d\",\r",
+							"            \"ClientName\": \"TEST\",\r",
+							"            \"ClientSecret\": \"TEST\",\r",
+							"            \"username\": \"username\",\r",
+							"            \"password\": \"password\",\r",
+							"            \"RememberLogin\": true\r",
+							"        })\r",
+							"    }\r",
+							"};\r",
+							"\r",
+							"\r",
+							"\r",
+							"pm.sendRequest(postRequest, (error, response) => {\r",
+							"    if (error) \r",
+							"        throw error;\r",
+							"    const data = response.json();\r",
+							"    console.log(data);\r",
+							"    pm.collectionVariables.set(\"sessionToken\", data.session_token);\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Token\": \"{{sessionToken}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{host}}/session/logout",
+					"protocol": "https",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"session",
+						"logout"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "host",
+			"value": "localhost:8080"
+		},
+		{
+			"key": "sessionToken",
+			"value": ""
+		},
+		{
+			"key": "refreshToken",
+			"value": ""
+		}
+	]
+}
