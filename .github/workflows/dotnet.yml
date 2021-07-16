@@ -22,9 +22,9 @@ jobs:
       - name: Update database
         run: |
           dotnet tool install --global dotnet-ef
-          dotnet tool restore
           cd Sinuka
           pwd
+          dotnet tool restore
           dotnet ef database update 
       - name: Start Sinuka
         run: dotnet run --project ./Sinuka/src/Sinuka.WebAPIs
