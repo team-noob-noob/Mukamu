@@ -55,7 +55,7 @@ namespace Sinuka.Application.UseCases.Login
                 return;
             }
 
-            var session = this._sessionFactory.CreateSession(user);
+            var session = this._sessionFactory.CreateSession(user, client);
 
             if(input.RememberLogin)
                 session.RefreshToken = this._refreshTokenFactory.CreateRefreshToken();

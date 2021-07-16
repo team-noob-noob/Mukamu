@@ -30,12 +30,12 @@ namespace Sinuka.Infrastructure.Database
             return new User(username, hashedPassword, emailInstance);
         }
 
-        public Session CreateSession(User user)
+        public Session CreateSession(User user, Client client)
         {
             dynamic payload = new ExpandoObject();
             payload.Email = user.Email;
             payload.Id = user.Id;
-            return new Session(user, this.CreateSessionToken(payload));
+            return new Session(user, this.CreateSessionToken(payload), client);
         }
 
         public SessionToken CreateSessionToken(dynamic payload)

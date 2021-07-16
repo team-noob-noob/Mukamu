@@ -40,7 +40,7 @@ namespace Sinuka.Application.UseCases.Refresh
             var newRefreshToken = this._refreshTokenFactory.CreateRefreshToken();
             session.RefreshToken.ExpiresAt = newRefreshToken.ExpiresAt;
 
-            var newSessionToken = this._sessionFactory.CreateSession(session.User).SessionToken;
+            var newSessionToken = this._sessionFactory.CreateSession(session.User, session.Client).SessionToken;
             session.SessionToken.Token = newSessionToken.Token;
             session.SessionToken.ExpiresAt = newSessionToken.ExpiresAt;
 

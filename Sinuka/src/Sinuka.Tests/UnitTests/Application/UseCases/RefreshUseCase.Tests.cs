@@ -47,13 +47,14 @@ namespace Sinuka.Tests.UnitTests.Application
             // Arrange
             this._mockSessionRepo
                 .Setup(x => x.FindSessionByRefreshToken(It.IsAny<string>()))
-                .ReturnsAsync(new Session() { RefreshToken = new RefreshToken("TEST", DateTime.Now + new TimeSpan(1, 0, 0)) });
+                .ReturnsAsync(new Session(new User("", "", new EmailAddress("", "")), new SessionToken("TEST", DateTime.Now + new TimeSpan(2, 0, 0)), new Client("", "", "")) 
+                { RefreshToken = new RefreshToken("TEST", DateTime.Now + new TimeSpan(1, 0, 0)) });
             this._mockRefreshTokenFact
                 .Setup(x => x.CreateRefreshToken())
                 .Returns(new RefreshToken("TEST2", DateTime.Now + new TimeSpan(2, 0, 0)));
             this._mockSessionFact
-                .Setup(x => x.CreateSession(It.IsAny<User>()))
-                .Returns(new Session(new User("", "", new EmailAddress("", "")), new SessionToken("TEST", DateTime.Now + new TimeSpan(2, 0, 0))));
+                .Setup(x => x.CreateSession(It.IsAny<User>(), It.IsAny<Client>()))
+                .Returns(new Session(new User("", "", new EmailAddress("", "")), new SessionToken("TEST", DateTime.Now + new TimeSpan(2, 0, 0)), new Client("", "", "")));
             var input = new RefreshInput();
 
             // Act

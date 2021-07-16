@@ -5,10 +5,11 @@ namespace Sinuka.Core.Models
     public class Session : IEntity
     {
         public Session() {}
-        public Session(User user, SessionToken sessionToken)
+        public Session(User user, SessionToken sessionToken, Client client)
         {
             this.User = user;
             this.SessionToken = sessionToken;
+            this.Client = client;
             this.Id = Guid.NewGuid();
         }
 
