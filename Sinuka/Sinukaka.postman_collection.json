@@ -18,6 +18,22 @@
 						],
 						"type": "text/javascript"
 					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"let username = pm.variables.replaceIn(\"{{$randomUserName}}\");\r",
+							"let password = pm.variables.replaceIn(\"{{$randomPassword}}\");\r",
+							"let email = pm.variables.replaceIn(\"{{$randomEmail}}\");\r",
+							"\r",
+							"pm.collectionVariables.set(\"username\", username);\r",
+							"pm.collectionVariables.set(\"password\", password);\r",
+							"pm.collectionVariables.set(\"email\", email);\r",
+							""
+						],
+						"type": "text/javascript"
+					}
 				}
 			],
 			"request": {
@@ -25,7 +41,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"email\": \"{{$randomEmail}}\",\r\n    \"password\": \"{{$randomUserName}}\",\r\n    \"username\": \"{{$randomPassword}}\"\r\n}",
+					"raw": "{\r\n    \"email\": \"{{email}}\",\r\n    \"password\": \"{{password}}\",\r\n    \"username\": \"{{username}}\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -94,7 +110,8 @@
 					"listen": "prerequest",
 					"script": {
 						"exec": [
-							"\r",
+							"const username = pm.collectionVariables.get(\"username\");\r",
+							"const password = pm.collectionVariables.get(\"password\");\r",
 							"\r",
 							"const host = pm.collectionVariables.get(\"host\");\r",
 							"const postRequest = {\r",
@@ -109,8 +126,8 @@
 							"            \"ClientId\": \"69a29c6d-80b1-4c7b-a08b-38c7a27aaf4d\",\r",
 							"            \"ClientName\": \"TEST\",\r",
 							"            \"ClientSecret\": \"TEST\",\r",
-							"            \"username\": \"username\",\r",
-							"            \"password\": \"password\",\r",
+							"            \"username\": username,\r",
+							"            \"password\": password,\r",
 							"            \"RememberLogin\": true\r",
 							"        })\r",
 							"    }\r",
@@ -172,7 +189,8 @@
 					"listen": "prerequest",
 					"script": {
 						"exec": [
-							"\r",
+							"const username = pm.collectionVariables.get(\"username\");\r",
+							"const password = pm.collectionVariables.get(\"password\");\r",
 							"\r",
 							"const host = pm.collectionVariables.get(\"host\");\r",
 							"const postRequest = {\r",
@@ -187,13 +205,12 @@
 							"            \"ClientId\": \"69a29c6d-80b1-4c7b-a08b-38c7a27aaf4d\",\r",
 							"            \"ClientName\": \"TEST\",\r",
 							"            \"ClientSecret\": \"TEST\",\r",
-							"            \"username\": \"username\",\r",
-							"            \"password\": \"password\",\r",
+							"            \"username\": username,\r",
+							"            \"password\": password,\r",
 							"            \"RememberLogin\": true\r",
 							"        })\r",
 							"    }\r",
 							"};\r",
-							"\r",
 							"\r",
 							"\r",
 							"pm.sendRequest(postRequest, (error, response) => {\r",
@@ -201,9 +218,8 @@
 							"        throw error;\r",
 							"    const data = response.json();\r",
 							"    console.log(data);\r",
-							"    pm.collectionVariables.set(\"refreshToken\", data.refresh_token);\r",
-							"});\r",
-							"\r",
+							"    pm.collectionVariables.set(\"sessionToken\", data.session_token);\r",
+							"})\r",
 							"\r",
 							""
 						],
@@ -266,7 +282,8 @@
 					"listen": "prerequest",
 					"script": {
 						"exec": [
-							"\r",
+							"const username = pm.collectionVariables.get(\"username\");\r",
+							"const password = pm.collectionVariables.get(\"password\");\r",
 							"\r",
 							"const host = pm.collectionVariables.get(\"host\");\r",
 							"const postRequest = {\r",
@@ -281,13 +298,12 @@
 							"            \"ClientId\": \"69a29c6d-80b1-4c7b-a08b-38c7a27aaf4d\",\r",
 							"            \"ClientName\": \"TEST\",\r",
 							"            \"ClientSecret\": \"TEST\",\r",
-							"            \"username\": \"username\",\r",
-							"            \"password\": \"password\",\r",
+							"            \"username\": username,\r",
+							"            \"password\": password,\r",
 							"            \"RememberLogin\": true\r",
 							"        })\r",
 							"    }\r",
 							"};\r",
-							"\r",
 							"\r",
 							"\r",
 							"pm.sendRequest(postRequest, (error, response) => {\r",
@@ -296,7 +312,7 @@
 							"    const data = response.json();\r",
 							"    console.log(data);\r",
 							"    pm.collectionVariables.set(\"sessionToken\", data.session_token);\r",
-							"});\r",
+							"})\r",
 							"\r",
 							""
 						],
@@ -362,6 +378,18 @@
 		},
 		{
 			"key": "refreshToken",
+			"value": ""
+		},
+		{
+			"key": "username",
+			"value": ""
+		},
+		{
+			"key": "password",
+			"value": ""
+		},
+		{
+			"key": "email",
 			"value": ""
 		}
 	]
