@@ -9,8 +9,8 @@ using Sinuka.Infrastructure.Database;
 namespace Sinuka.Infrastructure.Database.Migrations
 {
     [DbContext(typeof(SinukaDbContext))]
-    [Migration("20210710170237_AddPasswordResetEntity")]
-    partial class AddPasswordResetEntity
+    [Migration("20210716043355_InitialMigration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
