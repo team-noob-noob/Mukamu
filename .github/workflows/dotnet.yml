@@ -14,8 +14,7 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '14'
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v1
+      - uses: actions/setup-dotnet@v1
         with:
           dotnet-version: 5.0.x
       - uses: mirromutth/mysql-action@v1.1
@@ -23,6 +22,8 @@ jobs:
           mysql version: '5.7.32'
           mysql database: 'sinukaka'
           mysql root password: 'root'
+      - name: Insert Client Data
+        run: mysql -u root -proot sinukaka -e "INSERT INTO Clients(Id, Name, Secret, CreatedAt, UpdatedAt, HostName) VALUES ('69a29c6d-80b1-4c7b-a08b-38c7a27aaf4d', 'TEST', 'TEST', NOW(), NOW(), 'TEST')"
       - name: Install Newman
         run: npm install newman -g
       - name: Install dotnet-ef
@@ -32,7 +33,7 @@ jobs:
       - name: Run migrations to DB
         run: cd Sinuka && dotnet ef database update --project ./src/Sinuka.Infrastructure
       - name: Start Sinuka and Run E2E Tests
-        run: | 
+        run: |
           cd Sinuka && dotnet run --project ./src/Sinuka.WebAPIs &
           sleep 5
           cd Sinuka && newman run ./Sinukaka.postman_collection.json --insecure
