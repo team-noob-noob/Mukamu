@@ -31,7 +31,7 @@ jobs:
       - name: Run migrations to DB
         run: cd Sinuka && dotnet ef database update --project ./src/Sinuka.Infrastructure
       - name: Insert Client Data
-        run: sleep 10 && mysql -u root -proot -h 127.0.0.1 sinukaka -e "INSERT INTO Clients(Id, Name, Secret, CreatedAt, UpdatedAt, HostName) VALUES ('69a29c6d-80b1-4c7b-a08b-38c7a27aaf4d', 'TEST', 'TEST', NOW(), NOW(), 'TEST')"
+        run: sleep 10 && mysql -u root -proot -h 127.0.0.1 sinukaka -e "INSERT INTO Clients(Id, Name, Secret, CreatedAt, UpdatedAt, HostName) VALUES ('69a29c6d-80b1-4c7b-a08b-38c7a27aaf4d', 'TEST', 'TEST', NOW(), NOW(), 'TEST');"
       - name: Start Sinuka and Run E2E Tests
         run: |
           cd Sinuka && dotnet run --project ./src/Sinuka.WebAPIs &
