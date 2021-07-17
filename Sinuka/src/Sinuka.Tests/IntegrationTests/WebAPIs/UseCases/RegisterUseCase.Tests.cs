@@ -1,5 +1,6 @@
 using System.Threading.Tasks;
 using System.Net.Http.Json;
+using System.Net;
 using NUnit.Framework;
 using Bogus;
 using FluentAssertions;
@@ -58,7 +59,7 @@ namespace Sinuka.Tests.IntegrationTests.WebAPIs.UseCases
             var response = await client.PostAsync("/user/register", body);
 
             // Assert
-            response.StatusCode.Should().Be(400);
+            response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
         }
 
         [Test]
@@ -78,7 +79,7 @@ namespace Sinuka.Tests.IntegrationTests.WebAPIs.UseCases
             var response = await client.PostAsync("/user/register", body);
 
             // Assert
-            response.StatusCode.Should().Be(400);
+            response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
         }
 
         [Test]
@@ -92,7 +93,7 @@ namespace Sinuka.Tests.IntegrationTests.WebAPIs.UseCases
             var response = await client.PostAsync("/user/register", body);
 
             // Assert
-            response.StatusCode.Should().Be(400);
+            response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
         }
     }
 }
