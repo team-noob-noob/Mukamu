@@ -12,5 +12,11 @@ namespace Sinuka.Tests.IntegrationTests
         {
             dbContext.Clients.Add(TestClient);
         }
+
+        public static void ReinitializeDb(SinukaDbContext dbContext)
+        {
+            dbContext.Clients.Clear();
+            dbContext.SaveChanges();
+        }
     }
 }

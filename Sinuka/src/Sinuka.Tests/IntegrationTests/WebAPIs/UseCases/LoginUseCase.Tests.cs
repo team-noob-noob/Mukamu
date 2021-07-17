@@ -43,6 +43,12 @@ namespace Sinuka.Tests.IntegrationTests.WebAPIs.UseCases
             response.EnsureSuccessStatusCode();
         }
 
+        [OneTimeTearDown]
+        public void OneTimeTearDown()
+        {
+            this._factory.ClearDb();
+        }
+
         [Test]
         public async Task Login_ShouldReturn200_IfGivenValidCredentials()
         {

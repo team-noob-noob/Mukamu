@@ -9,10 +9,16 @@ namespace Sinuka.Tests.IntegrationTests.WebAPIs
     {
         private CustomWebApplicationFactory<Startup> _factory;
 
-        [SetUp]
-        public void Setup()
+        [OneTimeSetUp]
+        public void OneTimeSetUp()
         {
             this._factory = new CustomWebApplicationFactory<Startup>();
+        }
+
+        [OneTimeTearDown]
+        public void OneTimeTearDown()
+        {
+            this._factory.ClearDb();
         }
 
         [Test]

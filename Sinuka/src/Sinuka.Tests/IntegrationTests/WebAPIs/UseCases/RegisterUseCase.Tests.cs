@@ -27,6 +27,12 @@ namespace Sinuka.Tests.IntegrationTests.WebAPIs.UseCases
             this._factory = new CustomWebApplicationFactory<Startup>();
         }
 
+        [OneTimeTearDown]
+        public void OneTimeTearDown()
+        {
+            this._factory.ClearDb();
+        }
+
 
         [Test]
         public async Task Register_ShouldReturn200_IfGivenUnusedEmailAndUsername()

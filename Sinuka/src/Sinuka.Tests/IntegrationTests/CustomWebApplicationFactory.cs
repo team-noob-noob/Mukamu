@@ -11,6 +11,27 @@ namespace Sinuka.Tests.IntegrationTests
 {
     public class CustomWebApplicationFactory<TStartup> : WebApplicationFactory<TStartup> where TStartup : class
     {
+        public void ClearDb()
+        {
+            using (var scope = Services.CreateScope())
+            {
+                var scopedServices = scope.ServiceProvider;
+                var db = scopedServices.GetRequiredService<SinukaTestDbContext>();
+                var logger = scopedServices.GetRequiredService<ILogger<CustomWebApplicationFactory<TStartup>>>();
+
+                try
+                {
+                    Utilities.ReinitializeDb(db);
+                }
+                catch (Exception ex)
+                {
+                    logger.LogError(ex, "An error occurred seeding the " +
+                    "database with test messages. Error: {Message}", ex.Message);
+                    throw;
+                }
+            }
+        }
+
         protected override void ConfigureWebHost(IWebHostBuilder builder)
         {
             builder.ConfigureServices(services =>
@@ -28,6 +49,13 @@ namespace Sinuka.Tests.IntegrationTests
                     }
                 }
 
+                services.AddScoped<DbContextOptions<SinukaTestDbContext>>(sp =>
+                {
+                    return new DbContextOptionsBuilder<SinukaTestDbContext>()
+                        .UseApplicationServiceProvider(sp)
+                        .UseInMemoryDatabase("InMemoryDbForTesting")
+                        .Options;
+                });
                 services.AddDbContext<SinukaTestDbContext>(options =>
                 {
                     options.UseInMemoryDatabase("InMemoryDbForTesting");
