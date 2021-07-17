@@ -6,10 +6,10 @@ namespace Sinuka.Infrastructure.Database
 {
     public sealed class UnitOfWork : IUnitOfWork, IDisposable
     {
-        private readonly SinukaDbContext _context;
+        private readonly ISinukaDbContext _context;
         private bool _disposed;
 
-        public UnitOfWork(SinukaDbContext context) => this._context = context;
+        public UnitOfWork(ISinukaDbContext context) => this._context = context;
 
         public void Dispose() => this.Dispose(true);
 
