@@ -18,7 +18,7 @@ namespace Sinuka.Tests.EndToEndTests
         [Test]
         [TestCase("/")]
         [TestCase("/weatherforecast")]
-        public async Task Test(string url)
+        public async Task Get_EndpointsReturnSuccess(string url)
         {
             // Arrange
             var client = this._factory.CreateClient();
