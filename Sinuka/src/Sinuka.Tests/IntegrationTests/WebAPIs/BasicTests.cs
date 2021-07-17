@@ -2,9 +2,9 @@ using System.Threading.Tasks;
 using NUnit.Framework;
 using Sinuka.WebAPIs;
 
-namespace Sinuka.Tests.EndToEndTests
+namespace Sinuka.Tests.IntegrationTests.WebAPIs
 {
-    [TestFixture, Category("e2e")]
+    [TestFixture, Category("integration")]
     public class BasicTests
     {
         private CustomWebApplicationFactory<Startup> _factory;

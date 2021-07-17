@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Sinuka.Infrastructure.Database;
 
-namespace Sinuka.Tests.EndToEndTests
+namespace Sinuka.Tests.IntegrationTests
 {
     public class SinukaTestDbContext : SinukaDbContext, ISinukaDbContext
     {
