@@ -10,6 +10,7 @@ using Sinuka.Application.UseCases.Register;
 
 namespace Sinuka.Tests.IntegrationTests.WebAPIs.UseCases
 {
+    [TestFixture, Category("integration")]
     public class LoginUseCaseTests
     {
         private CustomWebApplicationFactory<Startup> _factory;
