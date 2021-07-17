@@ -45,6 +45,7 @@ namespace Sinuka.Tests.IntegrationTests
                     {
                         db.Database.EnsureCreated();
                         Utilities.InitializeDb(db);
+                        db.SaveChanges();
                     }
                     catch (Exception ex)
                     {
