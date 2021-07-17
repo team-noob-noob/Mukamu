@@ -20,8 +20,8 @@ namespace Sinuka.Tests.IntegrationTests.WebAPIs.UseCases
             Email = new Bogus.DataSets.Internet().Email(),
         };
 
-        [SetUp]
-        public void Setup()
+        [OneTimeSetUp]
+        public void OneTimeSetup()
         {
             this._factory = new CustomWebApplicationFactory<Startup>();
         }
