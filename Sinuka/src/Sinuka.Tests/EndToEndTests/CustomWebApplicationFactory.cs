@@ -6,8 +6,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Sinuka.Infrastructure.Database;
-using Sinuka.WebAPIs.Modules;
-
 
 namespace Sinuka.Tests.EndToEndTests
 {
