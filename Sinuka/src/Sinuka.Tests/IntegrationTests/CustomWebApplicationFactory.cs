@@ -53,11 +53,13 @@ namespace Sinuka.Tests.IntegrationTests
                 {
                     return new DbContextOptionsBuilder<SinukaTestDbContext>()
                         .UseApplicationServiceProvider(sp)
+                        .UseLazyLoadingProxies()
                         .UseInMemoryDatabase("InMemoryDbForTesting")
                         .Options;
                 });
                 services.AddDbContext<SinukaTestDbContext>(options =>
                 {
+                    options.UseLazyLoadingProxies();
                     options.UseInMemoryDatabase("InMemoryDbForTesting");
                 });
                 services.AddScoped<ISinukaDbContext>(provider => provider.GetService<SinukaTestDbContext>());
