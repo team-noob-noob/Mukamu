@@ -5,7 +5,7 @@ using Sinuka.Core.Interfaces.Services;
 
 namespace Sinuka.Infrastructure.Services
 {
-    public class EmailService : IEmailService
+    public class GmailEmailService : IEmailService
     {
         public async Task SendEmail(string to, string message, string subject)
         {
