@@ -100,7 +100,7 @@ namespace Sinuka.Tests.IntegrationTests.WebAPIs.UseCases
             var response = await client.GetAsync($"/session/authorize/?Token=THIS IS A TEST");
 
             // Assert
-            response.EnsureSuccessStatusCode();
+            response.StatusCode.Should().Be(HttpStatusCode.Accepted);
         }
     }
 }
