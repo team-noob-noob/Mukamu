@@ -89,7 +89,7 @@ namespace Sinuka.Tests.IntegrationTests.WebAPIs.UseCases
         }
 
         [Test]
-        public async Task Regiser_ShouldReturn400_IfGivenEmptyInput()
+        public async Task Regiser_ShouldReturn400_IfGivenEmptyObject()
         {
             var client = this._factory.CreateClient();
             var badInput = new RegisterInput();
