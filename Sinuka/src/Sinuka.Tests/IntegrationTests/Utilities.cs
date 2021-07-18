@@ -17,7 +17,6 @@ namespace Sinuka.Tests.IntegrationTests
         public static void InitializeDb(SinukaDbContext dbContext)
         {
             dbContext.Clients.Add(TestClient);
-            dbContext.Users.Add(TestUser);
             dbContext.SaveChanges();
         }
 
