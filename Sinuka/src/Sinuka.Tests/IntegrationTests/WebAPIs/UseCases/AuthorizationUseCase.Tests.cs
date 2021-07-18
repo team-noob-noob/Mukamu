@@ -84,7 +84,7 @@ namespace Sinuka.Tests.IntegrationTests.WebAPIs.UseCases
             var client = this._factory.CreateClient();
 
             // Act
-            var response = await client.GetAsync($"/session/authorize/?sessionToken={this._sessionToken}");
+            var response = await client.GetAsync($"/session/authorize/?Token={this._sessionToken}");
 
             // Assert
             response.EnsureSuccessStatusCode();
@@ -97,7 +97,7 @@ namespace Sinuka.Tests.IntegrationTests.WebAPIs.UseCases
             var client = this._factory.CreateClient();
 
             // Act
-            var response = await client.GetAsync($"/session/authorize/?session=Token=THIS IS A TEST");
+            var response = await client.GetAsync($"/session/authorize/?Token=THIS IS A TEST");
 
             // Assert
             response.EnsureSuccessStatusCode();
