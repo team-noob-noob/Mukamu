@@ -38,7 +38,7 @@ jobs:
           sleep 5
           cd Sinuka && newman run ./Sinukaka.postman_collection.json --insecure
 
-  UnitTest_Sinuka:
+  Test_Sinuka:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -53,7 +53,7 @@ jobs:
     - name: Sinuka - Test
       run: cd Sinuka && dotnet test --no-build --verbosity normal
     
-  UnitTest_Mukamu:
+  Test_Mukamu:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
