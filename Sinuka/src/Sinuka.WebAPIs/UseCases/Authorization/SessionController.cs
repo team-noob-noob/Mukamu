@@ -1,10 +1,13 @@
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using FluentValidation;
 using Sinuka.Application.UseCases.Authorization;
 
+
 namespace Sinuka.WebAPIs.UseCases.Authorization
 {
+    [Produces("application/json")]
     [ApiController]
     [Route("[controller]/[action]")]
     public class SessionController : ControllerBase, IAuthorizationPresenter
@@ -21,7 +24,13 @@ namespace Sinuka.WebAPIs.UseCases.Authorization
         void IAuthorizationPresenter.ValidToken()
             => this._viewModel = this.Ok(new { IsTokenValid = true });
 
+        /// <summary>Checks whether the given SessionToken is valid or not</summary>
+        /// <returns>Flag/bool whether the Session Token is valid or not</returns>
+        /// <response code="202">Indicates that the Session Token is invalid</response>
+        /// <response code="200">Indicates that the Session Token is valid</response>
         [HttpGet]
+        [ProducesResponseType(StatusCodes.Status202Accepted)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> Authorize([FromQuery] AuthorizationInput input)
         {
             var result = new AuthorizationInputValidation().Validate(input);
