@@ -91,7 +91,7 @@ namespace Sinuka.Tests.IntegrationTests.WebAPIs.UseCases
         }
 
         [Test]
-        public async Task Authorize_ShouldReturn400_IfInvalidSessionToken()
+        public async Task Authorize_ShouldReturn202_IfInvalidSessionToken()
         {
             // Arrange
             var client = this._factory.CreateClient();
