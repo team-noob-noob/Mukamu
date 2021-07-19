@@ -26,9 +26,13 @@ namespace Sinuka.WebAPIs.UseCases.Authorization
 
         /// <summary>Checks whether the given SessionToken is valid or not</summary>
         /// <returns>Flag/bool whether the Session Token is valid or not</returns>
+        /// <response code="500">Indicates that an unhandled error/exception occured</response>
+        /// <response code="400">Indicates that one of the property in the input is missing/incorrect</response>
         /// <response code="202">Indicates that the Session Token is invalid</response>
         /// <response code="200">Indicates that the Session Token is valid</response>
         [HttpGet]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status202Accepted)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> Authorize([FromQuery] AuthorizationInput input)

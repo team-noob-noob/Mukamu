@@ -1,5 +1,6 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.WebUtilities;
 using Hangfire;
 using FluentValidation;
@@ -56,7 +57,17 @@ namespace Sinuka.WebAPIs.UseCases.Login
             this._viewModel = Redirect(url);
         }
 
+        /// <summary>Checks whether the given credentials are valid</summary>
+        /// <returns>SessionToken and RefreshToken</returns>
+        /// <response code="500">Indicates that an unhandled error/exception occured</response>
+        /// <response code="400">Indicates that either the client or account credentials are invalid, or one of the property in the input is missing/incorrect</response>
+        /// <response code="302">Returns the URL to the client with Session Token and Refresh Token as query parameters</response>
+        /// <response code="200">Returns the Session Token and Refresh Token</response>
         [HttpPost]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status302Found)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> Login([FromBody] LoginInput input)
         {
             var result = new LoginInputValidation().Validate(input);
