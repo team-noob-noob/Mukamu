@@ -25,10 +25,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Sinuka.Application\Sinuka.Application.csproj" />
-    <ProjectReference Include="..\Sinuka.Core\Sinuka.Core.csproj" />
-    <ProjectReference Include="..\Sinuka.Infrastructure\Sinuka.Infrastructure.csproj" />
-    <ProjectReference Include="..\Sinuka.WebAPIs\Sinuka.WebAPIs.csproj" />
+    <ProjectReference Include="..\..\Sinuka.Application\Sinuka.Application.csproj" />
+    <ProjectReference Include="..\..\Sinuka.Core\Sinuka.Core.csproj" />
+    <ProjectReference Include="..\..\Sinuka.Infrastructure\Sinuka.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Sinuka.WebAPIs\Sinuka.WebAPIs.csproj" />
   </ItemGroup>
 
 </Project>
