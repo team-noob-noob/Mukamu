@@ -15,6 +15,8 @@ using Hangfire;
 using Sinuka.WebAPIs.Modules;
 using Hangfire.Storage.MySql;
 using System.Data;
+using System.Reflection;
+using System.IO;
 
 namespace Sinuka.WebAPIs
 {
@@ -35,6 +37,10 @@ namespace Sinuka.WebAPIs
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Sinuka.WebAPIs", Version = "v1" });
+                // Set the comments path for the Swagger JSON and UI.
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                c.IncludeXmlComments(xmlPath);
             });
             services.AddUseCases();
             services.AddMySqlServer();
@@ -50,7 +56,7 @@ namespace Sinuka.WebAPIs
                 app.UseSwagger();
                 app.UseSwaggerUI(c => {
                     c.SwaggerEndpoint("/swagger/v1/swagger.json", "Sinuka.WebAPIs v1");
-                    c.RoutePrefix = "";
+                    c.RoutePrefix = string.Empty;
                 });
             }
 
