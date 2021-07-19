@@ -38,7 +38,7 @@ jobs:
           sleep 5
           cd Sinuka && newman run ./Sinukaka.postman_collection.json --insecure
 
-  Test_Sinuka:
+  IntegrationTests_Sinuka:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -51,8 +51,23 @@ jobs:
     - name: Sinuka - Build
       run: cd Sinuka && dotnet build --no-restore
     - name: Sinuka - Test
-      run: cd Sinuka && dotnet test --no-build --verbosity normal
-    
+      run: cd Sinuka && dotnet test .\src\Sinuka.Tests\IntegrationTests\ --no-build --verbosity normal
+
+  UnitTests_Sinuka:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 5.0.x
+    - name: Sinuka - Restore dependencies
+      run: cd Sinuka && dotnet restore
+    - name: Sinuka - Build
+      run: cd Sinuka && dotnet build --no-restore
+    - name: Sinuka - Test
+      run: cd Sinuka && dotnet test .\src\Sinuka.Tests\UnitTests\ --no-build --verbosity normal
+
   Test_Mukamu:
     runs-on: ubuntu-latest
     steps:
