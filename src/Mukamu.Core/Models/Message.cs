@@ -9,8 +9,15 @@ namespace Mukamu.Core.Models
     /// </remarks>
     public class Message : IEntity
     {
+        public Message(string actualMessage, User sender)
+        {
+            this.Sender = sender;
+            this.ActualMessage = actualMessage;
+        }
+
         public Guid Id { get; set; }
-        
+
+        /// <summary>The actual message to the receiver</summary>
         public string ActualMessage { get; set; }
 
         /// <summary>The time when the message will be visible to the reciever</summary>

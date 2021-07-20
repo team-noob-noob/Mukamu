@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace Mukamu.Core.Models
 {
+    /// <summary>Represents a post on the public wall</summary>
     public class Post : IEntity
     {
         public Post(User user, string message, Attachment? attachment)
