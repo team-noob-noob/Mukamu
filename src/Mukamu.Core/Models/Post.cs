@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace Mukamu.Core.Models
 {
@@ -13,11 +14,12 @@ namespace Mukamu.Core.Models
 
         public Guid Id { get; set; }
         public string Message { get; set; }
-
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
         public DateTime? DeletedAt { get; set; }
 
+        public virtual ICollection<Comment> Comments { get; set; }
+            = new List<Comment>();
         public virtual Attachment? Attachment { get; set; }
         public virtual User User { get; set; }
     }
