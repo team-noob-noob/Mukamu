@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace Mukamu.Core.Models
 {
@@ -23,5 +24,9 @@ namespace Mukamu.Core.Models
         public DateTime? DeletedAt { get; set; }
 
         public virtual User Commenter { get; set; }
+
+        public virtual Attachment? Attachment { get; set; }
+
+        public virtual ICollection<Comment> Comments { get; set; }
     }
 }

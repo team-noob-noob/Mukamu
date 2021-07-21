@@ -8,21 +8,28 @@ namespace Mukamu.Core.Models
     {
         public Post(User user, string message, Attachment? attachment)
         {
-            this.User = user;
+            this.Poster = user;
             this.Message = message;
             this.Attachment = attachment;
         }
 
         public Guid Id { get; set; }
+        
         public string Message { get; set; }
+
         public DateTime CreatedAt { get; set; }
+
         public DateTime UpdatedAt { get; set; }
+
         public DateTime? DeletedAt { get; set; }
 
         public virtual ICollection<Comment> Comments { get; set; }
             = new List<Comment>();
+
         public virtual Attachment? Attachment { get; set; }
-        public virtual User User { get; set; }
+
+        /// <summary>The user who posted</summary>
+        public virtual User Poster { get; set; }
     }
 }
 
