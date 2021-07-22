@@ -30,6 +30,9 @@ namespace Mukamu.Core.Models
 
         /// <summary>The user who posted</summary>
         public virtual User Poster { get; set; }
+
+        public void AddComment(Comment newComment)
+            => this.Comments.Add(newComment);
     }
 }
 

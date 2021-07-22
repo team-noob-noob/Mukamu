@@ -24,5 +24,8 @@ namespace Mukamu.Core.Models
 
         public virtual ICollection<User> Users { get; set; }
             = new List<User>();
+
+        public void AddMessage(Message newMessage)
+            => this.Messages.Add(newMessage);
     }
 }
