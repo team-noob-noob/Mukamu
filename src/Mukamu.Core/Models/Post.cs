@@ -10,12 +10,11 @@ namespace Mukamu.Core.Models
         {
             this.Id = Guid.NewGuid();
         }
-        public Post(User user, string message, Attachment? attachment)
+        public Post(User user, string message)
         {
             this.Id = Guid.NewGuid();
             this.Poster = user;
             this.Message = message;
-            this.Attachment = attachment;
         }
 
         public Guid Id { get; set; }
