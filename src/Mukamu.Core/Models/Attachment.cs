@@ -6,7 +6,20 @@ namespace Mukamu.Core.Models
     /// <summary>Represents a file/image uploaded to a post or message</summary>
     public class Attachment : IEntity
     {
+        public Attachment(string fileName, string extension, byte[] blobData)
+        {
+            this.FileName = fileName;
+            this.Extension = extension;
+            this.BlobData = blobData;
+        }
+
         public Guid Id { get; set; }
+
+        public string FileName { get; set; }
+
+        public string Extension { get; set; }
+
+        public byte[] BlobData { get; set; }
 
         public DateTime CreatedAt { get; set; }
 
