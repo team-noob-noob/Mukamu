@@ -9,6 +9,7 @@ namespace Mukamu.Infrastructure.Database
     {
         DbSet<Attachment> Attachments { get; set; }
         DbSet<Comment> Comments { get; set; }
+        DbSet<SubComment> SubCommmnts { get; set; }
         DbSet<Conversation> Conversations { get; set; }
         DbSet<Message> Messages { get; set; }
         DbSet<Post> Posts { get; set; }

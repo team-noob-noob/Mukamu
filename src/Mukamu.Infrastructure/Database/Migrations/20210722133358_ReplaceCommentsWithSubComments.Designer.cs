@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Mukamu.Infrastructure.Database;
 
 namespace Mukamu.Infrastructure.Database.Migrations
 {
     [DbContext(typeof(MukamuDbContext))]
-    partial class MukamuDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210722133358_ReplaceCommentsWithSubComments")]
+    partial class ReplaceCommentsWithSubComments
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -208,9 +210,6 @@ namespace Mukamu.Infrastructure.Database.Migrations
                     b.Property<Guid?>("CommentId")
                         .HasColumnType("char(36)");
 
-                    b.Property<Guid?>("CommenterId")
-                        .HasColumnType("char(36)");
-
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime(6)");
 
@@ -227,8 +226,6 @@ namespace Mukamu.Infrastructure.Database.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CommentId");
-
-                    b.HasIndex("CommenterId");
 
                     b.ToTable("SubCommmnts");
                 });
@@ -331,12 +328,6 @@ namespace Mukamu.Infrastructure.Database.Migrations
                     b.HasOne("Mukamu.Core.Models.Comment", null)
                         .WithMany("SubComments")
                         .HasForeignKey("CommentId");
-
-                    b.HasOne("Mukamu.Core.Models.User", "Commenter")
-                        .WithMany()
-                        .HasForeignKey("CommenterId");
-
-                    b.Navigation("Commenter");
                 });
 
             modelBuilder.Entity("Mukamu.Core.Models.Comment", b =>

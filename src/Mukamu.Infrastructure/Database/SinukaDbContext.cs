@@ -14,6 +14,7 @@ namespace Mukamu.Infrastructure.Database
         public DbSet<Conversation> Conversations { get; set; }
         public DbSet<Message> Messages { get; set; }
         public DbSet<Post> Posts { get; set; }
+        public DbSet<SubComment> SubCommmnts { get; set; }
 
         public MukamuDbContext(DbContextOptions options) : base(options) {}
 
