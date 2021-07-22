@@ -9,9 +9,13 @@ namespace Mukamu.Core.Models
     /// </remarks>
     public class Message : IEntity
     {
-        public Message() {}
+        public Message() 
+        {
+            this.Id = Guid.NewGuid();
+        }
         public Message(string actualMessage, User sender)
         {
+            this.Id = Guid.NewGuid();
             this.Sender = sender;
             this.ActualMessage = actualMessage;
         }

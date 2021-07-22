@@ -4,9 +4,13 @@ namespace Mukamu.Core.Models
 {
     public class SubComment : IEntity
     {
-        public SubComment() {}
+        public SubComment() 
+        {
+            this.Id = Guid.NewGuid();
+        }
         public SubComment(string message, User commenter) 
         {
+            this.Id = Guid.NewGuid();
             this.Message = message;
             this.Commenter = commenter;
         }

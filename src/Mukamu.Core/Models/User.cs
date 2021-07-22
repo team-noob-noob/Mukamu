@@ -5,9 +5,13 @@ namespace Mukamu.Core.Models
 {
     public class User : IEntity
     {
-        public User() {}
+        public User() 
+        {
+            this.Id = Guid.NewGuid();
+        }
         public User(Guid externalId)
         {
+            this.Id = Guid.NewGuid();
             this.ExternalId = externalId;
         }
 
@@ -27,5 +31,8 @@ namespace Mukamu.Core.Models
             
         public virtual ICollection<Conversation> Conversations { get; set; }
             = new List<Conversation>();
+
+        public void AddPost(Post newPost)
+            => this.Posts.Add(newPost);
     }
 }

@@ -6,9 +6,13 @@ namespace Mukamu.Core.Models
     /// <summary>Represents an exchange of Message between users</summary>
     public class Conversation : IEntity
     {
-        public Conversation() {}
+        public Conversation() 
+        {
+            this.Id = Guid.NewGuid();
+        }
         public Conversation(ICollection<User> users)
         {
+            this.Id = Guid.NewGuid();
             this.Users = users;
         }
 

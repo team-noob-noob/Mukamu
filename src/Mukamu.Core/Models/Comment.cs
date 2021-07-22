@@ -6,9 +6,13 @@ namespace Mukamu.Core.Models
     /// <summary>Represents a comment on a Post</summary>
     public class Comment : IEntity
     {
-        public Comment() {}
+        public Comment() 
+        {
+            this.Id = Guid.NewGuid();
+        }
         public Comment(string message, User commenter)
         {
+            this.Id = Guid.NewGuid();
             this.Message = message;
             this.Commenter = commenter;
         }
@@ -29,5 +33,9 @@ namespace Mukamu.Core.Models
         public virtual Attachment? Attachment { get; set; }
 
         public virtual ICollection<SubComment> SubComments { get; set; }
+            = new List<SubComment>();
+
+        public void AddSubComment(SubComment newSubComment)
+            => this.SubComments.Add(newSubComment);
     }
 }

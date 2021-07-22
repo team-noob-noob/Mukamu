@@ -6,9 +6,13 @@ namespace Mukamu.Core.Models
     /// <summary>Represents a post on the public wall</summary>
     public class Post : IEntity
     {
-        public Post() {}
+        public Post() 
+        {
+            this.Id = Guid.NewGuid();
+        }
         public Post(User user, string message, Attachment? attachment)
         {
+            this.Id = Guid.NewGuid();
             this.Poster = user;
             this.Message = message;
             this.Attachment = attachment;
