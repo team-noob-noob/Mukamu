@@ -6,6 +6,7 @@ namespace Mukamu.Core.Models
     /// <summary>Represents a comment on a Post</summary>
     public class Comment : IEntity
     {
+        public Comment() {}
         public Comment(string message, User commenter)
         {
             this.Message = message;

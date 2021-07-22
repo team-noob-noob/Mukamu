@@ -5,6 +5,7 @@ namespace Mukamu.Core.Models
 {
     public class User : IEntity
     {
+        public User() {}
         public User(Guid externalId)
         {
             this.ExternalId = externalId;

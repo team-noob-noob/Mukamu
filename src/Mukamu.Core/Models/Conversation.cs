@@ -6,6 +6,7 @@ namespace Mukamu.Core.Models
     /// <summary>Represents an exchange of Message between users</summary>
     public class Conversation : IEntity
     {
+        public Conversation() {}
         public Conversation(ICollection<User> users)
         {
             this.Users = users;

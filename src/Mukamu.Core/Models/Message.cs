@@ -9,6 +9,7 @@ namespace Mukamu.Core.Models
     /// </remarks>
     public class Message : IEntity
     {
+        public Message() {}
         public Message(string actualMessage, User sender)
         {
             this.Sender = sender;
