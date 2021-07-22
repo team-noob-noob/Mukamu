@@ -20,6 +20,9 @@ namespace Mukamu.Core.Models
         /// <summary>Id from the external id service</summary>
         public Guid ExternalId { get; set; }
 
+        /// <summary>The nickname that will be displayed to the public</summary>
+        public string DisplayName { get; set; }
+
         public DateTime CreatedAt { get; set; }
 
         public DateTime UpdatedAt { get; set; }
