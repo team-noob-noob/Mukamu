@@ -32,14 +32,14 @@ namespace Sinuka.Infrastructure.Database
 
         public Session CreateSession(User user, Client client)
         {
+            return new Session(user, this.CreateSessionToken(user), client);
+        }
+
+        public SessionToken CreateSessionToken(User user)
+        {
             dynamic payload = new ExpandoObject();
             payload.Email = user.Email;
             payload.Id = user.Id;
-            return new Session(user, this.CreateSessionToken(payload), client);
-        }
-
-        public SessionToken CreateSessionToken(dynamic payload)
-        {
             var expiresAt = DateTime.Now + Sinuka.Infrastructure.Configurations.TokenConfig.SessionTokenLifetimeLength;
             payload.ExpiresAt = expiresAt;
             var token = JwtTokenGenerator.GeneratorToken(payload);
