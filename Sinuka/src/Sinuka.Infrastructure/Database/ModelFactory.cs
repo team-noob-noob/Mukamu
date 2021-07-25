@@ -38,10 +38,11 @@ namespace Sinuka.Infrastructure.Database
         public SessionToken CreateSessionToken(User user)
         {
             dynamic payload = new ExpandoObject();
-            payload.Email = user.Email;
+            payload.Email = user.Email.Email;
             payload.Id = user.Id;
             var expiresAt = DateTime.Now + Sinuka.Infrastructure.Configurations.TokenConfig.SessionTokenLifetimeLength;
             payload.ExpiresAt = expiresAt;
+            payload.Role = user.Role.Name;
             var token = JwtTokenGenerator.GeneratorToken(payload);
             return new SessionToken(token, expiresAt);
         }
