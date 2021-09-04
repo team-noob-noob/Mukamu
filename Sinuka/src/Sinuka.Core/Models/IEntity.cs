@@ -11,3 +11,5 @@ namespace Sinuka.Core.Models
         DateTime DeletedAt { get; set; }
     }
 }
+
+//sample
